@@ -1,0 +1,15 @@
+.idea
+.vscode
+.DS_Store
+web-build/
+web-report/
+
+node_modules/*
+.expo/*
+.expo-shared/*
+.history/*
+npm-debug.*
+*.log
+yarn.lock
+
+/beta
