@@ -6,6 +6,7 @@ import Events from '../views/events';
 import Conference from '../views/conference';
 import ConferenceDay from '../views/conferenceDay';
 import ConferenceDayIssue from '../views/conferenceIssue';
+import ConferenceSearch from '../views/conferenceSearch';
 import {
   CustomDrawerContentComponent,
   navigationOptions,
@@ -22,15 +23,19 @@ export const JoinedMenuWrapper = startPage => {
     {
       Search: {
         screen: EmptyDrawer,
-        navigationOptions: () => navigationOptions('Search', false),
+        navigationOptions: () => navigationOptions('Search'),
       },
       About: {
         screen: EmptyDrawer,
-        navigationOptions: navigationOptions('About JIT reporting', false),
+        navigationOptions: navigationOptions('About JIT reporting'),
       },
       Notifications: {
         screen: EmptyDrawer,
         navigationOptions: navigationOptions('Notifications', true),
+      },
+      ConferenceSearch: {
+        screen: ConferenceSearch,
+        navigationOptions: navigationOptions(null),
       },
       Landing: {
         screen: Events,

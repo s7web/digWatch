@@ -31,6 +31,7 @@ export default class ConferenceDayScreen extends Component {
     //this.props.navigation.state.params.conferenceData
 
     let conference = this.props.navigation.state.params.conferenceData;
+    console.log('conference page', conference);
     this.setState({ conference });
 
     const start = moment(conference.startdatetime);
@@ -50,13 +51,13 @@ export default class ConferenceDayScreen extends Component {
       <View style={styles.container}>
         <View style={styles.container}>
           <Image
-            source={{ url: conference.image }}
+            resizeMode="contain"
+            source={{ uri: conference.image }}
             style={{
               width: 120,
               height: 80,
               marginLeft: 12,
               marginBottom: 10,
-              resizeMode: 'contain',
             }}
           />
 
@@ -103,7 +104,7 @@ export default class ConferenceDayScreen extends Component {
                       fontFamily: 'robotoRegular',
                       color: '#757575',
                     }}
-                    bottomDivider
+                    bottomDivider={dates.length == i + 1 ? true : false}
                     topDivider
                   />
                 </TouchableOpacity>

@@ -8,11 +8,10 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
-import { ListItem, Input, Avatar, Divider } from 'react-native-elements';
-import { ApiRequests, apiRoutes } from '../api/requests';
-import RNPickerSelect from 'react-native-picker-select';
+import { Divider } from 'react-native-elements';
 import HTML from 'react-native-render-html';
 import { Loader } from '../utils/loader';
+import { ApiRequests, apiRoutes } from '../api/requests';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -32,6 +31,8 @@ export default class ConferenceIssueScreen extends Component {
     const conferenceIssueData = this.props.navigation.state.params
       .conferenceIssueData;
 
+    console.log('PARENT DATA FROM SEARCH', conferenceIssueData);
+
     ApiRequests.conferencesDayReport(
       apiRoutes.conferencesDayReport + conferenceIssueData.uuid
     ).then(dayReport => {
@@ -48,33 +49,10 @@ export default class ConferenceIssueScreen extends Component {
 
   render() {
     let { conferenceIssueData } = this.state;
-    const placeholder = {
-      label: 'Filter by issue',
-      value: null,
-      color: '#9EA0A4',
-    };
+
     return (
       <View style={styles.container}>
         <View style={styles.container}>
-          <Input
-            inputContainerStyle={{
-              borderBottomWidth: 0,
-            }}
-            containerStyle={styles.input}
-            placeholder="Search"
-          />
-
-          <RNPickerSelect
-            placeholder={placeholder}
-            onValueChange={value => console.log(value)}
-            style={pickerSelectStyles}
-            items={[
-              { label: 'Football', value: 'football' },
-              { label: 'Baseball', value: 'baseball' },
-              { label: 'Hockey', value: 'hockey' },
-            ]}
-          />
-
           <Divider style={styles.divider} />
 
           {!conferenceIssueData && <Loader loading={true} />}

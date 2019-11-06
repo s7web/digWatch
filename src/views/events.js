@@ -73,27 +73,20 @@ export default class EventsScreen extends Component {
                 >
                   <ListItem
                     leftAvatar={
-                      <View
-                        style={{
-                          justifyContent: 'left',
-                          alignItems: 'left',
-                        }}
-                      >
+                      <View>
                         <Image
+                          resizeMode="contain"
                           source={{
                             uri: l.image,
                           }}
                           style={{
                             width: 100,
                             height: 60,
-                            resizeMode: 'contain',
                           }}
                         />
                       </View>
                     }
-                    style={{
-                      paddingRight: 12,
-                    }}
+                    style={{ paddingLeft: 12, paddingRight: 12 }}
                     titleStyle={{
                       fontFamily: 'robotoRegular',
                       color: '#757575',
@@ -107,7 +100,7 @@ export default class EventsScreen extends Component {
                         }`}</Text>
                       </View>
                     }
-                    bottomDivider
+                    bottomDivider={conferences.length == i + 1 ? true : false}
                     topDivider
                   />
                 </TouchableOpacity>
@@ -133,10 +126,9 @@ const styles = StyleSheet.create({
   title: {
     color: '#4ac2f1',
     fontSize: 26,
-    fontWeight: 'bold',
     backgroundColor: 'transparent',
     marginBottom: 16,
-    fontFamily: 'robotoRegular',
+    fontFamily: 'robotoBold',
     paddingLeft: 12,
     paddingRight: 12,
   },

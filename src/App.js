@@ -6,11 +6,6 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 import AppLoading from './components/AppLoading';
 import { cacheImages, cacheFonts } from './helpers/AssetsCaching';
 
-import Events from './drawer/events';
-import Conference from './drawer/conference';
-import ConferenceDay from './drawer/conferenceDay';
-import ConferenceIssue from './drawer/conferenceIssue';
-
 import { JoinedMenuWrapper } from './drawer/joinedDrawerItem';
 
 import { drawerHeaderStyle } from '../assets/globalStyle/style';
@@ -27,7 +22,10 @@ const MainRoot = createAppContainer(
         navigationOptions: ({ navigation }) => ({
           headerTitle: () => {
             return (
-              <Image source={REPORTING_HEADER} style={drawerHeaderStyle.logo} />
+              <Image
+                source={REPORTING_HEADER}
+                style={drawerHeaderStyle.logoAlone}
+              />
             );
           },
           headerRight: (
@@ -121,6 +119,42 @@ const MainRoot = createAppContainer(
       ConferenceDayIssue: {
         path: '/conference/day/issue',
         screen: JoinedMenuWrapper('ConferenceDayIssue'),
+        navigationOptions: ({ navigation }) => ({
+          headerTitle: () => {
+            return (
+              <Image source={REPORTING_HEADER} style={drawerHeaderStyle.logo} />
+            );
+          },
+          headerRight: (
+            <Icon
+              name="menu"
+              size={30}
+              type="entypo"
+              iconStyle={{ paddingRight: 10, color: 'white' }}
+              onPress={navigation.toggleDrawer}
+            />
+          ),
+          headerLeft: (
+            <Icon
+              name="keyboard-backspace"
+              size={30}
+              type="material"
+              iconStyle={{ paddingLeft: 10, color: 'white' }}
+              onPress={() => {
+                navigation.goBack();
+              }}
+            />
+          ),
+          headerStyle: drawerHeaderStyle.header,
+          headerTitleStyle: {
+            marginLeft: 'auto',
+            marginRight: 'auto',
+          },
+        }),
+      },
+      ConferenceSearch: {
+        path: '/conference/day/issue/search',
+        screen: JoinedMenuWrapper('ConferenceSearch'),
         navigationOptions: ({ navigation }) => ({
           headerTitle: () => {
             return (

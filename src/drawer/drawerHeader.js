@@ -42,7 +42,7 @@ export const CustomDrawerContentComponent = props => {
   );
 };
 
-export const navigationOptions = (title, lastItem) => ({
+export const navigationOptions = (title, lastItem = false) => ({
   drawerLabel: () =>
     title == null ? (
       title

@@ -6,6 +6,7 @@ export const apiRoutes = {
   conferences: '/appconferences?page=',
   conferencesDay: '/appsessions4conferencegroupedbyday/',
   conferencesDayReport: '/jsonapi/node/conference_sessions/',
+  conferencesSearch: '/appconferencesessions/',
 };
 
 export const ApiRequests = {
@@ -16,6 +17,9 @@ export const ApiRequests = {
     return axios.get(baseUrl + route);
   },
   conferencesDayReport: route => {
+    return axios.get(baseUrl + route);
+  },
+  conferencesSearch: route => {
     return axios.get(baseUrl + route);
   },
 };

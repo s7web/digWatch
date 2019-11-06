@@ -2,11 +2,11 @@
   "expo": {
     "name": "Diplo",
     "slug": "Diplo-mobile-app",
+    "version": "1.0.0",
     "description": "Diplodokus",
     "privacy": "public",
     "sdkVersion": "34.0.0",
     "platforms": ["ios", "android"],
-    "version": "1.1.0",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
     "icon": "./assets/icons/icon.png",
@@ -19,7 +19,14 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.s7design.s7design",
+      "icon": "./digwatch-icon.png"
+    },
+    "android": {
+      "package": "com.s7design.s7design",
+      "versionCode": 1,
+      "icon": "./digwatch-icon.png"
     }
   }
 }

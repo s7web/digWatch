@@ -9,88 +9,73 @@ import {
 } from 'react-native';
 import { ListItem, Input, Divider } from 'react-native-elements';
 import { ApiRequests, apiRoutes } from '../api/requests';
+import RNPickerSelect from 'react-native-picker-select';
 import moment from 'moment';
 import { isCloseToBottom } from '../utils/scrollDetection';
 import { Loader } from '../utils/loader';
-import { SearchForm } from '../utils/searchForm';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-export default class ConferenceDayScreen extends Component {
+export default class ConferenceSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
       page: 0,
-      conferenceDayList: false,
-      conferenceData: {},
+      conferenceSearch: false,
+      searchResults: false,
     };
   }
 
   async componentDidMount() {
     //Parent data
-    //this.props.navigation.state.params.conferenceDayData
-    let conferenceData = this.props.navigation.state.params.conferenceDayData;
+    let conferenceSearch = this.props.navigation.state.params
+      .conferenceSearchData;
 
-    this.setState({ conferenceData }, () => {
-      this.handlePopulateData(0).then(conferenceDayList => {
-        conferenceDayList = conferenceDayList['data']['rows'];
-        console.log('CONFERENCE ISSUE LIST', conferenceDayList);
-        this.setState({ conferenceDayList });
+    console.log('PARENT DATA', conferenceSearch);
+
+    this.setState({ conferenceSearch }, () => {
+      this.handlePopulateData().then(searchResults => {
+        searchResults = searchResults['data']['rows'];
+        console.log('Search results ', searchResults);
+        this.setState({ searchResults });
+        if (searchResults.length == 0) {
+          this.setState({ noResults: true });
+        }
       });
     });
   }
 
-  handlePopulateData = page => {
-    let { date, conferenceId } = this.state.conferenceData;
-    let apiReadyDate = moment(date).format('YYYYMMDD');
-    return ApiRequests.conferencesDay(
-      apiRoutes.conferencesDay + `${conferenceId}/${apiReadyDate}?`
+  handlePopulateData = () => {
+    const { conferenceId, issueId, keyword } = this.state.conferenceSearch;
+    return ApiRequests.conferencesSearch(
+      apiRoutes.conferencesSearch +
+        `${conferenceId}/?issuesid=${issueId}&title=${keyword}&body=${keyword}`
     );
   };
 
-  handleInfiniteScroll = async () => {
-    let pagination = this.state.page + 1;
-    this.setState({ page: pagination });
-    this.handlePopulateData(pagination).then(conferenceDayList => {
-      conferenceDayList = conferenceDayList['data']['rows'];
-      let merge = [...this.state.conferenceDayList, ...conferenceDayList];
-      this.setState({ conferenceDayList: merge });
-    });
-  };
-
   render() {
-    let { conferenceDayList, conferenceData } = this.state;
+    const { searchResults, conferenceSearch } = this.state;
     let { push } = this.props.navigation;
-
+    const placeholder = {
+      label: 'Filter by issue',
+      value: null,
+      color: '#9EA0A4',
+    };
     return (
       <View style={styles.container}>
-        <View style={styles.containerForm}>
-          <SearchForm
-            routeData={(searchKeyword, issueId) =>
-              push('ConferenceSearch', {
-                conferenceSearchData: {
-                  conferenceId: conferenceData.conferenceId,
-                  issueId: issueId,
-                  image: conferenceData.image,
-                  keyword: searchKeyword,
-                },
-              })
-            }
-          />
-
+        <View style={styles.container}>
+          <Divider style={styles.divider} />
+          <Text style={{ ...styles.title }}>Search results</Text>
           <Divider style={styles.divider} />
 
-          {conferenceData && (
-            <Text style={styles.title}>{conferenceData.formatedDate}</Text>
+          {!searchResults && <Loader loading={true} />}
+          {this.state.noResults && (
+            <Text style={{ flex: 1, textAlign: 'center' }}>No Results</Text>
           )}
 
-          <Divider style={styles.divider} />
-
-          {!conferenceDayList && <Loader loading={true} />}
-
           <ScrollView style={{ marginBottom: 12, marginTop: -10 }}>
-            {conferenceDayList &&
-              conferenceDayList.map((l, i) => (
+            {searchResults &&
+              searchResults.map((l, i) => (
                 <TouchableOpacity
                   disabled={l.statuspublished == 1 ? false : true}
                   key={i}
@@ -100,11 +85,13 @@ export default class ConferenceDayScreen extends Component {
                         time: `${moment(l.startdatetime).format(
                           'HH:mm'
                         )} - ${moment(l.enddatetime).format('HH:mm')}`,
-                        formatedDate: conferenceData.formatedDate,
+                        formatedDate: moment(l.startdatetime).format(
+                          'dddd, D MMM'
+                        ),
                         title: l.title,
-                        image: conferenceData.image,
+                        image: conferenceSearch.image,
                         uuid: l.uuid,
-                        conferenceId: conferenceData.conferenceId,
+                        conferenceId: conferenceSearch.conferenceId,
                       },
                     })
                   }
@@ -114,10 +101,12 @@ export default class ConferenceDayScreen extends Component {
                     disabledStyle={{ opacity: 0.2 }}
                     title={
                       <View>
-                        <Text style={styles.titleList}>{`${moment(
+                        <Text style={styles.titleListBold}>{`${moment(
                           l.startdatetime
                         ).format('HH:mm')} - ${moment(l.enddatetime).format(
                           'HH:mm'
+                        )} | ${moment(l.startdatetime).format(
+                          'dddd, D MMM'
                         )}`}</Text>
                         <Text style={styles.titleList}>{l.title}</Text>
                       </View>
@@ -134,11 +123,6 @@ export default class ConferenceDayScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 12,
-    paddingBottom: 12,
-  },
-  containerForm: {
     flex: 1,
     paddingTop: 12,
     paddingBottom: 12,
@@ -175,5 +159,43 @@ const styles = StyleSheet.create({
     color: '#757575',
     fontSize: 12,
     color: 'black',
+  },
+  titleListBold: {
+    fontFamily: 'robotoBold',
+    fontWeight: 'bold',
+    color: '#757575',
+    fontSize: 12,
+    color: 'black',
+  },
+});
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    fontSize: 18,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderColor: '#757575',
+    borderRadius: 10,
+    borderWidth: 0.5,
+    color: '#414040',
+    paddingRight: 30, // to ensure the text is never behind the icon
+    width: SCREEN_WIDTH - 22,
+    marginLeft: 11,
+    marginBottom: 10,
+    height: 40,
+  },
+  inputAndroid: {
+    fontSize: 18,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: '#757575',
+    color: '#414040',
+    paddingRight: 30, // to ensure the text is never behind the icon
+    width: SCREEN_WIDTH - 22,
+    marginLeft: 11,
+    marginBottom: 10,
+    height: 40,
   },
 });
