@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
+  RefreshControl,
 } from 'react-native';
 import { ListItem, Input, Divider } from 'react-native-elements';
 import { ApiRequests, apiRoutes } from '../api/requests';
@@ -23,6 +24,7 @@ export default class ConferenceDayScreen extends Component {
       page: 0,
       conferenceDayList: false,
       conferenceData: {},
+      refreshing: false,
     };
   }
 
@@ -40,10 +42,10 @@ export default class ConferenceDayScreen extends Component {
     });
   }
 
-  handlePopulateData = page => {
+  handlePopulateData = async page => {
     let { date, conferenceId } = this.state.conferenceData;
     let apiReadyDate = moment(date).format('YYYYMMDD');
-    return ApiRequests.conferencesDay(
+    return await ApiRequests.conferencesDay(
       apiRoutes.conferencesDay + `${conferenceId}/${apiReadyDate}?`
     );
   };
@@ -51,15 +53,27 @@ export default class ConferenceDayScreen extends Component {
   handleInfiniteScroll = async () => {
     let pagination = this.state.page + 1;
     this.setState({ page: pagination });
-    this.handlePopulateData(pagination).then(conferenceDayList => {
+    await this.handlePopulateData(pagination).then(conferenceDayList => {
       conferenceDayList = conferenceDayList['data']['rows'];
       let merge = [...this.state.conferenceDayList, ...conferenceDayList];
       this.setState({ conferenceDayList: merge });
     });
   };
 
+  onRefresh = async () => {
+    this.setState({ refreshing: true });
+    await this.handlePopulateData(0).then(conferenceDayList => {
+      conferenceDayList = conferenceDayList['data']['rows'];
+      this.setState({ conferenceDayList }, () => {
+        this.setState({ refreshing: false });
+        this.setState({ page: 0 });
+        this.setState({ blockInfinite: false });
+      });
+    });
+  };
+
   render() {
-    let { conferenceDayList, conferenceData } = this.state;
+    let { conferenceDayList, conferenceData, refreshing } = this.state;
     let { push } = this.props.navigation;
 
     return (
@@ -88,7 +102,15 @@ export default class ConferenceDayScreen extends Component {
 
           {!conferenceDayList && <Loader loading={true} />}
 
-          <ScrollView style={{ marginBottom: 12, marginTop: -10 }}>
+          <ScrollView
+            style={{ marginBottom: 12, marginTop: -10 }}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={() => this.onRefresh()}
+              />
+            }
+          >
             {conferenceDayList &&
               conferenceDayList.map((l, i) => (
                 <TouchableOpacity

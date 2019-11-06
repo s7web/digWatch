@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useCallback } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,9 +6,9 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-  ImageBackground,
+  RefreshControl,
 } from 'react-native';
-import { ListItem, Avatar } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import { ApiRequests, apiRoutes } from '../api/requests';
 import { Loader } from '../utils/loader';
 import { isCloseToBottom } from '../utils/scrollDetection';
@@ -20,6 +20,8 @@ export default class EventsScreen extends Component {
       page: 0,
       loading: false,
       conferences: false,
+      refreshing: false,
+      blockInfinite: false,
     };
   }
 
@@ -30,24 +32,41 @@ export default class EventsScreen extends Component {
     });
   }
 
-  handlePopulateData = page => {
-    return ApiRequests.conferences(apiRoutes.conferences + page);
+  handlePopulateData = async page => {
+    return await ApiRequests.conferences(apiRoutes.conferences + page);
   };
 
-  handleInfiniteScroll = () => {
-    this.setState({ loading: true });
-    let pagination = this.state.page + 1;
-    this.setState({ page: pagination });
-    this.handlePopulateData(pagination).then(conferences => {
+  handleInfiniteScroll = async () => {
+    if (this.state.blockInfinite === false) {
+      this.setState({ loading: true });
+      let pagination = this.state.page + 1;
+      this.setState({ page: pagination });
+      await this.handlePopulateData(pagination).then(conferences => {
+        conferences = conferences['data']['rows'];
+        let merge = [...this.state.conferences, ...conferences];
+        this.setState({ conferences: merge });
+        this.setState({ loading: false });
+        if (conferences.length == 0) {
+          this.setState({ blockInfinite: true });
+        }
+      });
+    }
+  };
+
+  onRefresh = async () => {
+    this.setState({ refreshing: true });
+    await this.handlePopulateData(0).then(conferences => {
       conferences = conferences['data']['rows'];
-      let merge = [...this.state.conferences, ...conferences];
-      this.setState({ conferences: merge });
-      this.setState({ loading: false });
+      this.setState({ conferences }, () => {
+        this.setState({ refreshing: false });
+        this.setState({ page: 0 });
+        this.setState({ blockInfinite: false });
+      });
     });
   };
 
   render() {
-    let { conferences, loading } = this.state;
+    let { conferences, loading, refreshing } = this.state;
     let { push } = this.props.navigation;
     return (
       <View style={styles.container}>
@@ -58,6 +77,12 @@ export default class EventsScreen extends Component {
 
           <ScrollView
             style={{ marginBottom: 12 }}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={() => this.onRefresh()}
+              />
+            }
             onScroll={({ nativeEvent }) => {
               if (isCloseToBottom(nativeEvent)) {
                 this.handleInfiniteScroll();
