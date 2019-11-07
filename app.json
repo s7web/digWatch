@@ -9,7 +9,7 @@
     "platforms": ["ios", "android"],
     "orientation": "portrait",
     "primaryColor": "#cccccc",
-    "icon": "./assets/icons/icon.png",
+    "icon": "./digwatch-icon.png",
     "splash": {
       "image": "./assets/icons/splash.png",
       "resizeMode": "cover"
@@ -20,11 +20,11 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.s7design.s7design",
+      "bundleIdentifier": "com.Diplo.Diplo",
       "icon": "./digwatch-icon.png"
     },
     "android": {
-      "package": "com.s7design.s7design",
+      "package": "com.Diplo.Diplo",
       "versionCode": 1,
       "icon": "./digwatch-icon.png"
     }

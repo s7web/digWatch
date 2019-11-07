@@ -50,7 +50,11 @@ const MainRoot = createAppContainer(
         navigationOptions: ({ navigation }) => ({
           headerTitle: () => {
             return (
-              <Image source={REPORTING_HEADER} style={drawerHeaderStyle.logo} />
+              <Image
+                onPress={() => alert(123)}
+                source={REPORTING_HEADER}
+                style={drawerHeaderStyle.logo}
+              />
             );
           },
           headerRight: (

@@ -35,11 +35,7 @@ const FormView = ({ routeData }) => {
         onValueChange={value => console.log(value)}
         style={{ ...pickerSelectStyles }}
         useNativeAndroidPickerStyle={false}
-        items={[
-          { label: 'Football', value: 'football' },
-          { label: 'Baseball', value: 'baseball' },
-          { label: 'Hockey', value: 'hockey' },
-        ]}
+        items={[{ label: 'TODO issues', value: 1 }]}
       />
 
       <Button

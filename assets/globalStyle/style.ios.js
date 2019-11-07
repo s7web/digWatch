@@ -5,6 +5,7 @@ export const drawerHeaderStyle = StyleSheet.create({
   logo: {
     width: 110,
     resizeMode: 'contain',
+    marginBottom: 20,
   },
   logoAlone: {
     width: 110,

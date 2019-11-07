@@ -15,7 +15,6 @@ export const drawerHeaderStyle = StyleSheet.create({
     left: SCREEN_WIDTH / 2 - 55,
   },
   header: {
-    //height: SCREEN_WIDTH * 0.25,
     height: 80,
     backgroundColor: '#757575',
   },
