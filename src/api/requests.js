@@ -22,4 +22,7 @@ export const ApiRequests = {
   conferencesSearch: route => {
     return axios.get(baseUrl + route);
   },
+  saveToken: route => {
+    return axios.get('http://10.0.1.188/store-token/' + route);
+  },
 };

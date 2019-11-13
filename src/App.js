@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
@@ -12,6 +12,10 @@ import { drawerHeaderStyle } from '../assets/globalStyle/style';
 const REPORTING_HEADER = require('../assets/images/logo/reporting-header.png');
 
 import vectorFonts from './helpers/vector-fonts';
+
+import registerForPushNotificationsAsync from './utils/pushNotifications';
+import { Notifications } from 'expo';
+import { InAppNotification } from './utils/inAppNotification';
 
 const MainRoot = createAppContainer(
   createStackNavigator(
@@ -201,6 +205,24 @@ const MainRoot = createAppContainer(
 
 export default () => {
   const [isReady, setIsReady] = useState(false);
+  const [notification, setNotification] = useState(false);
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(() => {
+      _notificationSubscription = Notifications.addListener(
+        _handleNotification
+      );
+    });
+  }, []);
+
+  _handleNotification = notification => {
+    //setNotification(notification);
+    //console.log('in app notifify', notification);
+    //alert(JSON.stringify(notification));
+    // setTimeout(() => {
+    //   setNotification(false);
+    // }, 7000);
+  };
 
   const loadAssetsAsync = async () => {
     const imageAssets = cacheImages([
@@ -230,5 +252,9 @@ export default () => {
     );
   }
 
-  return <MainRoot />;
+  return (
+    <>
+      <MainRoot />
+    </>
+  );
 };

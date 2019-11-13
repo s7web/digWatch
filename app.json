@@ -10,6 +10,9 @@
     "orientation": "portrait",
     "primaryColor": "#cccccc",
     "icon": "./digwatch-icon.png",
+    "notification": {
+      "icon": "./dw-push-logo.png"
+    },
     "splash": {
       "image": "./assets/icons/splash.png",
       "resizeMode": "cover"
