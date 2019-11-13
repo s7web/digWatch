@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Image } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { createAppContainer, createStackNavigator } from 'react-navigation';
+import {
+  createAppContainer,
+  createStackNavigator,
+  StackActions,
+  NavigationActions,
+} from 'react-navigation';
 
 import AppLoading from './components/AppLoading';
 import { cacheImages, cacheFonts } from './helpers/AssetsCaching';
@@ -26,10 +31,7 @@ const MainRoot = createAppContainer(
         navigationOptions: ({ navigation }) => ({
           headerTitle: () => {
             return (
-              <Image
-                source={REPORTING_HEADER}
-                style={drawerHeaderStyle.logoAlone}
-              />
+              <Image source={REPORTING_HEADER} style={drawerHeaderStyle.logo} />
             );
           },
           headerRight: (
@@ -39,6 +41,14 @@ const MainRoot = createAppContainer(
               type="entypo"
               iconStyle={{ paddingRight: 10, color: 'white' }}
               onPress={navigation.toggleDrawer}
+            />
+          ),
+          headerLeft: (
+            <Icon
+              name="keyboard-backspace"
+              size={30}
+              type="material"
+              iconStyle={{ color: 'transparent' }}
             />
           ),
           headerStyle: drawerHeaderStyle.header,
@@ -54,11 +64,7 @@ const MainRoot = createAppContainer(
         navigationOptions: ({ navigation }) => ({
           headerTitle: () => {
             return (
-              <Image
-                onPress={() => alert(123)}
-                source={REPORTING_HEADER}
-                style={drawerHeaderStyle.logo}
-              />
+              <Image source={REPORTING_HEADER} style={drawerHeaderStyle.logo} />
             );
           },
           headerRight: (
@@ -196,6 +202,48 @@ const MainRoot = createAppContainer(
           },
         }),
       },
+      About: {
+        path: '/website/page/for/about/details',
+        screen: JoinedMenuWrapper('About'),
+        navigationOptions: ({ navigation }) => ({
+          headerTitle: () => {
+            return (
+              <Image source={REPORTING_HEADER} style={drawerHeaderStyle.logo} />
+            );
+          },
+          headerRight: (
+            <Icon
+              name="menu"
+              size={30}
+              type="entypo"
+              iconStyle={{ paddingRight: 10, color: 'white' }}
+              onPress={navigation.toggleDrawer}
+            />
+          ),
+          headerLeft: (
+            <Icon
+              name="keyboard-backspace"
+              size={30}
+              type="material"
+              iconStyle={{ paddingLeft: 10, color: 'white' }}
+              onPress={() => {
+                const resetAction = StackActions.reset({
+                  index: 0,
+                  actions: [
+                    NavigationActions.navigate({ routeName: 'Landing' }),
+                  ],
+                });
+                navigation.dispatch(resetAction);
+              }}
+            />
+          ),
+          headerStyle: drawerHeaderStyle.header,
+          headerTitleStyle: {
+            marginLeft: 'auto',
+            marginRight: 'auto',
+          },
+        }),
+      },
     },
     {
       headerMode: 'float',
@@ -215,14 +263,7 @@ export default () => {
     });
   }, []);
 
-  _handleNotification = notification => {
-    //setNotification(notification);
-    //console.log('in app notifify', notification);
-    //alert(JSON.stringify(notification));
-    // setTimeout(() => {
-    //   setNotification(false);
-    // }, 7000);
-  };
+  _handleNotification = notification => {};
 
   const loadAssetsAsync = async () => {
     const imageAssets = cacheImages([
