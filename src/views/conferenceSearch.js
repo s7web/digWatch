@@ -31,12 +31,9 @@ export default class ConferenceSearch extends Component {
     let conferenceSearch = this.props.navigation.state.params
       .conferenceSearchData;
 
-    console.log('PARENT DATA', conferenceSearch);
-
     this.setState({ conferenceSearch }, () => {
       this.handlePopulateData().then(searchResults => {
         searchResults = searchResults['data']['rows'];
-        console.log('Search results ', searchResults);
         this.setState({ searchResults });
         if (searchResults.length == 0) {
           this.setState({ noResults: true });
@@ -47,10 +44,19 @@ export default class ConferenceSearch extends Component {
 
   handlePopulateData = () => {
     const { conferenceId, issueId, keyword } = this.state.conferenceSearch;
-    return ApiRequests.conferencesSearch(
-      apiRoutes.conferencesSearch +
-        `${conferenceId}/?issuesid=${issueId}&title=${keyword}&body=${keyword}`
-    );
+    let route = `${conferenceId}/`;
+    if (keyword != undefined && keyword.length) {
+      route += `?title=${keyword}&reporttext=${keyword}`;
+    }
+
+    if (issueId != undefined && issueId != null) {
+      route += `${
+        keyword != undefined && keyword.length ? '&' : '?'
+      }issuesid=${issueId}`;
+    } else {
+      route += '&issuesid=all';
+    }
+    return ApiRequests.conferencesSearch(route);
   };
 
   render() {
@@ -166,36 +172,5 @@ const styles = StyleSheet.create({
     color: '#757575',
     fontSize: 14,
     color: 'black',
-  },
-});
-
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 18,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    borderColor: '#757575',
-    borderRadius: 10,
-    borderWidth: 0.5,
-    color: '#414040',
-    paddingRight: 30, // to ensure the text is never behind the icon
-    width: SCREEN_WIDTH - 22,
-    marginLeft: 11,
-    marginBottom: 10,
-    height: 40,
-  },
-  inputAndroid: {
-    fontSize: 18,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderRadius: 10,
-    borderWidth: 0.5,
-    borderColor: '#757575',
-    color: '#414040',
-    paddingRight: 30, // to ensure the text is never behind the icon
-    width: SCREEN_WIDTH - 22,
-    marginLeft: 11,
-    marginBottom: 10,
-    height: 40,
   },
 });

@@ -22,7 +22,7 @@ export const ApiRequests = {
     return axios.get(baseUrl + route);
   },
   conferencesSearch: route => {
-    return axios.get(baseUrl + route);
+    return axios.get(baseUrl + apiRoutes.conferencesSearch + route);
   },
   conferenceIssues: confId => {
     return axios.get(baseUrl + apiRoutes.conferenceIssues + confId);

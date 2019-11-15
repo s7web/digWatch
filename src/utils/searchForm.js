@@ -1,14 +1,14 @@
 import React, { memo, useState, useEffect } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import { Input, Button, Icon } from 'react-native-elements';
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Keyboard } from 'react-native';
 import { ApiRequests } from '../api/requests';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const FormView = ({ confId, routeData }) => {
   const [form, setForm] = useState({});
-  const [formVisibility, setFormVisibility] = useState(true);
+  const [formVisibility, setFormVisibility] = useState(false);
   const [issues, setIssues] = useState([]);
 
   useEffect(() => {
@@ -24,6 +24,7 @@ const FormView = ({ confId, routeData }) => {
   };
 
   const handleSubmit = () => {
+    Keyboard.dismiss();
     routeData(form['keyword'], form['issueId']);
   };
 
@@ -44,16 +45,25 @@ const FormView = ({ confId, routeData }) => {
             inputContainerStyle={{
               borderBottomWidth: 0,
             }}
+            value={form['keyword'] && form.keyword}
             containerStyle={styles.input}
             inputStyle={{ fontFamily: 'robotoRegular', fontSize: 16 }}
             placeholder="Search"
-            onChangeText={text => setForm({ keyword: text, issueId: 216 })}
+            onChangeText={text => {
+              let formData = { ...form };
+              formData['keyword'] = text;
+              setForm(formData);
+            }}
           />
 
           {issues && (
             <RNPickerSelect
               placeholder={placeholder}
-              onValueChange={value => console.log(value)}
+              onValueChange={value => {
+                let formData = { ...form };
+                formData['issueId'] = value;
+                setForm(formData);
+              }}
               style={{ ...pickerSelectStyles }}
               useNativeAndroidPickerStyle={false}
               items={issues.map(issue => {
