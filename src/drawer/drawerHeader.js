@@ -54,7 +54,6 @@ export const navigationOptions = (title, lastItem = false) => ({
         titleStyle={{ fontFamily: 'robotoRegular', color: '#757575' }}
         topDivider
         bottomDivider={lastItem}
-        //onPress={() => alert(123)}
       />
     ),
 });

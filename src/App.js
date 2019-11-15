@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Image } from 'react-native';
+import { Image, Easing, Animated } from 'react-native';
 import { Icon } from 'react-native-elements';
 import {
   createAppContainer,
@@ -36,11 +36,15 @@ const MainRoot = createAppContainer(
           },
           headerRight: (
             <Icon
-              name="menu"
+              name={navigation.state.isDrawerOpen ? 'cross' : 'menu'}
               size={30}
               type="entypo"
               iconStyle={{ paddingRight: 10, color: 'white' }}
-              onPress={navigation.toggleDrawer}
+              onPress={() =>
+                navigation.state.isDrawerOpen
+                  ? navigation.closeDrawer()
+                  : navigation.openDrawer()
+              }
             />
           ),
           headerLeft: (
@@ -69,11 +73,15 @@ const MainRoot = createAppContainer(
           },
           headerRight: (
             <Icon
-              name="menu"
+              name={navigation.state.isDrawerOpen ? 'cross' : 'menu'}
               size={30}
               type="entypo"
               iconStyle={{ paddingRight: 10, color: 'white' }}
-              onPress={navigation.toggleDrawer}
+              onPress={() =>
+                navigation.state.isDrawerOpen
+                  ? navigation.closeDrawer()
+                  : navigation.openDrawer()
+              }
             />
           ),
           headerLeft: (
@@ -105,11 +113,15 @@ const MainRoot = createAppContainer(
           },
           headerRight: (
             <Icon
-              name="menu"
+              name={navigation.state.isDrawerOpen ? 'cross' : 'menu'}
               size={30}
               type="entypo"
               iconStyle={{ paddingRight: 10, color: 'white' }}
-              onPress={navigation.toggleDrawer}
+              onPress={() =>
+                navigation.state.isDrawerOpen
+                  ? navigation.closeDrawer()
+                  : navigation.openDrawer()
+              }
             />
           ),
           headerLeft: (
@@ -141,11 +153,15 @@ const MainRoot = createAppContainer(
           },
           headerRight: (
             <Icon
-              name="menu"
+              name={navigation.state.isDrawerOpen ? 'cross' : 'menu'}
               size={30}
               type="entypo"
               iconStyle={{ paddingRight: 10, color: 'white' }}
-              onPress={navigation.toggleDrawer}
+              onPress={() =>
+                navigation.state.isDrawerOpen
+                  ? navigation.closeDrawer()
+                  : navigation.openDrawer()
+              }
             />
           ),
           headerLeft: (
@@ -177,11 +193,15 @@ const MainRoot = createAppContainer(
           },
           headerRight: (
             <Icon
-              name="menu"
+              name={navigation.state.isDrawerOpen ? 'cross' : 'menu'}
               size={30}
               type="entypo"
               iconStyle={{ paddingRight: 10, color: 'white' }}
-              onPress={navigation.toggleDrawer}
+              onPress={() =>
+                navigation.state.isDrawerOpen
+                  ? navigation.closeDrawer()
+                  : navigation.openDrawer()
+              }
             />
           ),
           headerLeft: (
@@ -213,11 +233,15 @@ const MainRoot = createAppContainer(
           },
           headerRight: (
             <Icon
-              name="menu"
+              name={navigation.state.isDrawerOpen ? 'cross' : 'menu'}
               size={30}
               type="entypo"
               iconStyle={{ paddingRight: 10, color: 'white' }}
-              onPress={navigation.toggleDrawer}
+              onPress={() =>
+                navigation.state.isDrawerOpen
+                  ? navigation.closeDrawer()
+                  : navigation.openDrawer()
+              }
             />
           ),
           headerLeft: (
@@ -247,7 +271,13 @@ const MainRoot = createAppContainer(
     },
     {
       headerMode: 'screen',
-      //cardStyle: { opacity: 1 },
+      transitionConfig: () => ({
+        transitionSpec: {
+          duration: 400,
+          easing: Easing.out(Easing.poly(4)),
+          timing: Animated.timing,
+        },
+      }),
     }
   )
 );

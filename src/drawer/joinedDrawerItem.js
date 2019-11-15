@@ -1,7 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator } from 'react-navigation';
-import { Dimensions } from 'react-native';
-
+import { Dimensions, Easing, Animated } from 'react-native';
 import Events from '../views/events';
 import Conference from '../views/conference';
 import ConferenceDay from '../views/conferenceDay';
@@ -53,6 +52,7 @@ export const JoinedMenuWrapper = startPage => {
     },
     {
       initialRouteName: startPage,
+      //drawerType: 'slide',
       drawerPosition: 'right',
       contentOptions: {
         activeTintColor: 'black',
