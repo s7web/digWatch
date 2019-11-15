@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   titleList: {
     fontFamily: 'robotoRegular',
     color: '#757575',
-    fontSize: 12,
+    fontSize: 14,
     color: 'black',
   },
 });

@@ -31,8 +31,6 @@ export default class ConferenceIssueScreen extends Component {
     const conferenceIssueData = this.props.navigation.state.params
       .conferenceIssueData;
 
-    console.log('PARENT DATA FROM SEARCH', conferenceIssueData);
-
     ApiRequests.conferencesDayReport(
       apiRoutes.conferencesDayReport + conferenceIssueData.uuid
     ).then(dayReport => {
