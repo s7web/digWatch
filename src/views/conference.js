@@ -29,9 +29,7 @@ export default class ConferenceDayScreen extends Component {
   componentDidMount() {
     //Parent data
     //this.props.navigation.state.params.conferenceData
-
     let conference = this.props.navigation.state.params.conferenceData;
-    console.log('conference page', conference);
     this.setState({ conference });
 
     const start = moment(conference.startdatetime);

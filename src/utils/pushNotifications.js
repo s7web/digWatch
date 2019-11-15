@@ -39,6 +39,5 @@ export default async function registerForPushNotificationsAsync() {
 
   ApiRequests.saveToken(token).then(res => {
     //if we want anything to say about this we do it here
-    console.log('save token', res);
   });
 }

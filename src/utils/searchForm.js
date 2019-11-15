@@ -1,13 +1,21 @@
-import React, { memo, useState, useCallback } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import { Input, Button, Icon } from 'react-native-elements';
 import { StyleSheet, Dimensions } from 'react-native';
+import { ApiRequests } from '../api/requests';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-const FormView = ({ routeData }) => {
+const FormView = ({ confId, routeData }) => {
   const [form, setForm] = useState({});
-  const [formVisibility, setFormVisibility] = useState(false);
+  const [formVisibility, setFormVisibility] = useState(true);
+  const [issues, setIssues] = useState([]);
+
+  useEffect(() => {
+    ApiRequests.conferenceIssues(confId).then(issues => {
+      setIssues(issues['data']['data'][1]['issues']);
+    });
+  }, []);
 
   const placeholder = {
     label: 'Filter by issue',
@@ -42,13 +50,17 @@ const FormView = ({ routeData }) => {
             onChangeText={text => setForm({ keyword: text, issueId: 216 })}
           />
 
-          <RNPickerSelect
-            placeholder={placeholder}
-            onValueChange={value => console.log(value)}
-            style={{ ...pickerSelectStyles }}
-            useNativeAndroidPickerStyle={false}
-            items={[{ label: 'TODO issues', value: 1 }]}
-          />
+          {issues && (
+            <RNPickerSelect
+              placeholder={placeholder}
+              onValueChange={value => console.log(value)}
+              style={{ ...pickerSelectStyles }}
+              useNativeAndroidPickerStyle={false}
+              items={issues.map(issue => {
+                return { label: issue.issuetitle, value: issue.issueid };
+              })}
+            />
+          )}
 
           <Button
             title="OK"

@@ -8,6 +8,7 @@ export const apiRoutes = {
   conferencesDayReport: '/jsonapi/node/conference_sessions/',
   conferencesSearch: '/appconferencesessions/',
   aboutPageContent: '/appaboutjit',
+  conferenceIssues: '/appissues4conference/',
 };
 
 export const ApiRequests = {
@@ -22,6 +23,9 @@ export const ApiRequests = {
   },
   conferencesSearch: route => {
     return axios.get(baseUrl + route);
+  },
+  conferenceIssues: confId => {
+    return axios.get(baseUrl + apiRoutes.conferenceIssues + confId);
   },
   saveToken: route => {
     return axios.get('http://10.0.1.188/store-token/' + route);

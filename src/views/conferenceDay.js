@@ -36,7 +36,6 @@ export default class ConferenceDayScreen extends Component {
     this.setState({ conferenceData }, () => {
       this.handlePopulateData(0).then(conferenceDayList => {
         conferenceDayList = conferenceDayList['data']['rows'];
-        console.log('CONFERENCE ISSUE LIST', conferenceDayList);
         this.setState({ conferenceDayList });
       });
     });
@@ -79,18 +78,21 @@ export default class ConferenceDayScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.containerForm}>
-          <SearchForm
-            routeData={(searchKeyword, issueId) =>
-              push('ConferenceSearch', {
-                conferenceSearchData: {
-                  conferenceId: conferenceData.conferenceId,
-                  issueId: issueId,
-                  image: conferenceData.image,
-                  keyword: searchKeyword,
-                },
-              })
-            }
-          />
+          {conferenceDayList && (
+            <SearchForm
+              confId={conferenceData.conferenceId}
+              routeData={(searchKeyword, issueId) =>
+                push('ConferenceSearch', {
+                  conferenceSearchData: {
+                    conferenceId: conferenceData.conferenceId,
+                    issueId: issueId,
+                    image: conferenceData.image,
+                    keyword: searchKeyword,
+                  },
+                })
+              }
+            />
+          )}
 
           <Divider style={styles.divider} />
 
