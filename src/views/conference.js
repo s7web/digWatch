@@ -63,7 +63,6 @@ export default class ConferenceDayScreen extends Component {
 
           <Text style={styles.title}>
             Session reports from the {conference.title}{' '}
-            {`${new Date(conference.startdatetime).getFullYear()}`},
           </Text>
           <Text style={styles.titleLast}>{conference.location}</Text>
 

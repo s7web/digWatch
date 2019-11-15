@@ -120,9 +120,7 @@ export default class EventsScreen extends Component {
                       <View style={{ marginLeft: 20 }}>
                         <Text>Session reports from the</Text>
                         <Text>{l.title}</Text>
-                        <Text>{`${new Date(l.startdatetime).getFullYear()} ${
-                          l.location
-                        }`}</Text>
+                        <Text>{l.location}</Text>
                       </View>
                     }
                     bottomDivider={conferences.length == i + 1 ? true : false}
