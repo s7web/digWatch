@@ -38,6 +38,7 @@ const MainRoot = createAppContainer(
             <Icon
               name={navigation.state.isDrawerOpen ? 'cross' : 'menu'}
               size={30}
+              underlayColor={'#757575'}
               type="entypo"
               iconStyle={{ paddingRight: 10, color: 'white' }}
               onPress={() =>
@@ -50,6 +51,7 @@ const MainRoot = createAppContainer(
           headerLeft: (
             <Icon
               name="keyboard-backspace"
+              underlayColor={'#757575'}
               size={30}
               type="material"
               iconStyle={{ color: 'transparent' }}
@@ -74,6 +76,7 @@ const MainRoot = createAppContainer(
           headerRight: (
             <Icon
               name={navigation.state.isDrawerOpen ? 'cross' : 'menu'}
+              underlayColor={'#757575'}
               size={30}
               type="entypo"
               iconStyle={{ paddingRight: 10, color: 'white' }}
@@ -89,6 +92,7 @@ const MainRoot = createAppContainer(
               name="keyboard-backspace"
               size={30}
               type="material"
+              underlayColor={'#757575'}
               iconStyle={{ paddingLeft: 10, color: 'white' }}
               onPress={() => {
                 navigation.goBack();
@@ -116,6 +120,7 @@ const MainRoot = createAppContainer(
               name={navigation.state.isDrawerOpen ? 'cross' : 'menu'}
               size={30}
               type="entypo"
+              underlayColor={'#757575'}
               iconStyle={{ paddingRight: 10, color: 'white' }}
               onPress={() =>
                 navigation.state.isDrawerOpen
@@ -128,6 +133,7 @@ const MainRoot = createAppContainer(
             <Icon
               name="keyboard-backspace"
               size={30}
+              underlayColor={'#757575'}
               type="material"
               iconStyle={{ paddingLeft: 10, color: 'white' }}
               onPress={() => {
@@ -156,6 +162,7 @@ const MainRoot = createAppContainer(
               name={navigation.state.isDrawerOpen ? 'cross' : 'menu'}
               size={30}
               type="entypo"
+              underlayColor={'#757575'}
               iconStyle={{ paddingRight: 10, color: 'white' }}
               onPress={() =>
                 navigation.state.isDrawerOpen
@@ -169,6 +176,7 @@ const MainRoot = createAppContainer(
               name="keyboard-backspace"
               size={30}
               type="material"
+              underlayColor={'#757575'}
               iconStyle={{ paddingLeft: 10, color: 'white' }}
               onPress={() => {
                 navigation.goBack();
@@ -196,6 +204,7 @@ const MainRoot = createAppContainer(
               name={navigation.state.isDrawerOpen ? 'cross' : 'menu'}
               size={30}
               type="entypo"
+              underlayColor={'#757575'}
               iconStyle={{ paddingRight: 10, color: 'white' }}
               onPress={() =>
                 navigation.state.isDrawerOpen
@@ -209,6 +218,7 @@ const MainRoot = createAppContainer(
               name="keyboard-backspace"
               size={30}
               type="material"
+              underlayColor={'#757575'}
               iconStyle={{ paddingLeft: 10, color: 'white' }}
               onPress={() => {
                 navigation.goBack();
@@ -236,6 +246,7 @@ const MainRoot = createAppContainer(
               name={navigation.state.isDrawerOpen ? 'cross' : 'menu'}
               size={30}
               type="entypo"
+              underlayColor={'#757575'}
               iconStyle={{ paddingRight: 10, color: 'white' }}
               onPress={() =>
                 navigation.state.isDrawerOpen
@@ -249,6 +260,7 @@ const MainRoot = createAppContainer(
               name="keyboard-backspace"
               size={30}
               type="material"
+              underlayColor={'#757575'}
               iconStyle={{ paddingLeft: 10, color: 'white' }}
               onPress={() => {
                 const resetAction = StackActions.reset({

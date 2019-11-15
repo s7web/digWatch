@@ -25,10 +25,6 @@ export const JoinedMenuWrapper = startPage => {
         screen: AboutPage,
         navigationOptions: navigationOptions('About JIT reporting'),
       },
-      Notifications: {
-        screen: EmptyDrawer,
-        navigationOptions: navigationOptions('Notifications', true),
-      },
       ConferenceSearch: {
         screen: ConferenceSearch,
         navigationOptions: navigationOptions(null),
