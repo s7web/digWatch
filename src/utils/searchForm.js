@@ -1,12 +1,13 @@
 import React, { memo, useState, useCallback } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
-import { Input, Button } from 'react-native-elements';
+import { Input, Button, Icon } from 'react-native-elements';
 import { StyleSheet, Dimensions } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const FormView = ({ routeData }) => {
   const [form, setForm] = useState({});
+  const [formVisibility, setFormVisibility] = useState(false);
 
   const placeholder = {
     label: 'Filter by issue',
@@ -20,31 +21,44 @@ const FormView = ({ routeData }) => {
 
   return (
     <>
-      <Input
-        inputContainerStyle={{
-          borderBottomWidth: 0,
-        }}
-        containerStyle={styles.input}
-        inputStyle={{ fontFamily: 'robotoRegular', fontSize: 16 }}
-        placeholder="Search"
-        onChangeText={text => setForm({ keyword: text, issueId: 216 })}
+      <Icon
+        name={'sound-mix'}
+        size={28}
+        type="entypo"
+        underlayColor={'white'}
+        iconStyle={{ paddingRight: 10, color: '#757575' }}
+        onPress={() => setFormVisibility(!formVisibility)}
+        containerStyle={{ alignItems: 'flex-end', marginBottom: 2 }}
       />
+      {formVisibility && (
+        <>
+          <Input
+            inputContainerStyle={{
+              borderBottomWidth: 0,
+            }}
+            containerStyle={styles.input}
+            inputStyle={{ fontFamily: 'robotoRegular', fontSize: 16 }}
+            placeholder="Search"
+            onChangeText={text => setForm({ keyword: text, issueId: 216 })}
+          />
 
-      <RNPickerSelect
-        placeholder={placeholder}
-        onValueChange={value => console.log(value)}
-        style={{ ...pickerSelectStyles }}
-        useNativeAndroidPickerStyle={false}
-        items={[{ label: 'TODO issues', value: 1 }]}
-      />
+          <RNPickerSelect
+            placeholder={placeholder}
+            onValueChange={value => console.log(value)}
+            style={{ ...pickerSelectStyles }}
+            useNativeAndroidPickerStyle={false}
+            items={[{ label: 'TODO issues', value: 1 }]}
+          />
 
-      <Button
-        title="OK"
-        type="clear"
-        buttonStyle={styles.button}
-        titleStyle={{ color: '#757778', fontFamily: 'robotoRegular' }}
-        onPress={() => handleSubmit()}
-      />
+          <Button
+            title="OK"
+            type="clear"
+            buttonStyle={styles.button}
+            titleStyle={{ color: '#757778', fontFamily: 'robotoRegular' }}
+            onPress={() => handleSubmit()}
+          />
+        </>
+      )}
     </>
   );
 };
