@@ -246,7 +246,8 @@ const MainRoot = createAppContainer(
       },
     },
     {
-      headerMode: 'float',
+      headerMode: 'screen',
+      //cardStyle: { opacity: 1 },
     }
   )
 );
