@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Image, Easing, Animated } from 'react-native';
+import { Image, Easing, Animated, ImageBackground, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import {
   createAppContainer,
@@ -29,11 +29,18 @@ const MainRoot = createAppContainer(
         path: '/',
         screen: JoinedMenuWrapper('Landing'),
         navigationOptions: ({ navigation }) => ({
-          headerTitle: () => {
-            return (
-              <Image source={REPORTING_HEADER} style={drawerHeaderStyle.logo} />
-            );
-          },
+          headerTitle: () => (
+            <ImageBackground
+              source={REPORTING_HEADER}
+              style={drawerHeaderStyle.logo}
+              imageStyle={drawerHeaderStyle.image}
+            >
+              <Text style={{ color: 'transparent' }}>
+                {'\n'}
+                {'\n'}
+              </Text>
+            </ImageBackground>
+          ),
           headerRight: (
             <Icon
               name={navigation.state.isDrawerOpen ? 'cross' : 'menu'}
@@ -70,7 +77,16 @@ const MainRoot = createAppContainer(
         navigationOptions: ({ navigation }) => ({
           headerTitle: () => {
             return (
-              <Image source={REPORTING_HEADER} style={drawerHeaderStyle.logo} />
+              <ImageBackground
+                source={REPORTING_HEADER}
+                style={drawerHeaderStyle.logo}
+                imageStyle={drawerHeaderStyle.image}
+              >
+                <Text style={{ color: 'transparent' }}>
+                  {'\n'}
+                  {'\n'}
+                </Text>
+              </ImageBackground>
             );
           },
           headerRight: (
@@ -112,7 +128,16 @@ const MainRoot = createAppContainer(
         navigationOptions: ({ navigation }) => ({
           headerTitle: () => {
             return (
-              <Image source={REPORTING_HEADER} style={drawerHeaderStyle.logo} />
+              <ImageBackground
+                source={REPORTING_HEADER}
+                style={drawerHeaderStyle.logo}
+                imageStyle={drawerHeaderStyle.image}
+              >
+                <Text style={{ color: 'transparent' }}>
+                  {'\n'}
+                  {'\n'}
+                </Text>
+              </ImageBackground>
             );
           },
           headerRight: (
@@ -154,7 +179,16 @@ const MainRoot = createAppContainer(
         navigationOptions: ({ navigation }) => ({
           headerTitle: () => {
             return (
-              <Image source={REPORTING_HEADER} style={drawerHeaderStyle.logo} />
+              <ImageBackground
+                source={REPORTING_HEADER}
+                style={drawerHeaderStyle.logo}
+                imageStyle={drawerHeaderStyle.image}
+              >
+                <Text style={{ color: 'transparent' }}>
+                  {'\n'}
+                  {'\n'}
+                </Text>
+              </ImageBackground>
             );
           },
           headerRight: (
@@ -196,7 +230,16 @@ const MainRoot = createAppContainer(
         navigationOptions: ({ navigation }) => ({
           headerTitle: () => {
             return (
-              <Image source={REPORTING_HEADER} style={drawerHeaderStyle.logo} />
+              <ImageBackground
+                source={REPORTING_HEADER}
+                style={drawerHeaderStyle.logo}
+                imageStyle={drawerHeaderStyle.image}
+              >
+                <Text style={{ color: 'transparent' }}>
+                  {'\n'}
+                  {'\n'}
+                </Text>
+              </ImageBackground>
             );
           },
           headerRight: (
@@ -238,7 +281,16 @@ const MainRoot = createAppContainer(
         navigationOptions: ({ navigation }) => ({
           headerTitle: () => {
             return (
-              <Image source={REPORTING_HEADER} style={drawerHeaderStyle.logo} />
+              <ImageBackground
+                source={REPORTING_HEADER}
+                style={drawerHeaderStyle.logo}
+                imageStyle={drawerHeaderStyle.image}
+              >
+                <Text style={{ color: 'transparent' }}>
+                  {'\n'}
+                  {'\n'}
+                </Text>
+              </ImageBackground>
             );
           },
           headerRight: (
