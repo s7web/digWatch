@@ -41,27 +41,34 @@ export const CustomDrawerContentComponent = props => {
       <View
         style={{
           flexDirection: 'row',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
+          marginLeft: 12,
         }}
       >
         <Icon
-          containerStyle={{ margin: 12, padding: 4 }}
-          name="facebook-f"
+          containerStyle={{ margin: 10, padding: 4 }}
+          name="facebook-square"
           type="font-awesome"
-          color="grey"
+          color="lightgrey"
           onPress={() => Linking.openURL(`https://www.facebook.com`)}
         />
         <Icon
-          containerStyle={{ margin: 12, padding: 4 }}
-          name="instagram"
-          type="font-awesome"
-          color="grey"
-        />
-        <Icon
-          containerStyle={{ margin: 12, padding: 4 }}
+          containerStyle={{ margin: 10, padding: 4 }}
           name="twitter"
           type="font-awesome"
-          color="grey"
+          color="lightgrey"
+        />
+        <Icon
+          containerStyle={{ margin: 10, padding: 4 }}
+          name="linkedin"
+          type="font-awesome"
+          color="lightgrey"
+        />
+        <Icon
+          containerStyle={{ margin: 10, padding: 4 }}
+          name="instagram"
+          type="font-awesome"
+          color="lightgrey"
         />
       </View>
     </View>

@@ -23,7 +23,7 @@ export const JoinedMenuWrapper = startPage => {
     {
       About: {
         screen: AboutPage,
-        navigationOptions: navigationOptions('About JIT reporting'),
+        navigationOptions: navigationOptions('About JIT reporting', true),
       },
       ConferenceSearch: {
         screen: ConferenceSearch,
