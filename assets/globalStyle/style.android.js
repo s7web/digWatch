@@ -1,6 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
+const WINDOW_HEIGHT = Dimensions.get('window').height;
+
 export const drawerHeaderStyle = StyleSheet.create({
   logoContainer: {
     width: 110,
@@ -24,5 +26,9 @@ export const drawerHeaderStyle = StyleSheet.create({
     //height: SCREEN_WIDTH * 0.25,
     height: 80,
     backgroundColor: '#757575',
+  },
+  menuHeight: {
+    backgroundColor: 'white',
+    height: WINDOW_HEIGHT - 80,
   },
 });

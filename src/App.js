@@ -367,6 +367,7 @@ export default () => {
       require('../assets/images/logo/reporting-logo.png'),
       require('../assets/images/logo/reporting-header.png'),
       require('../assets/icons/calendar.png'),
+      require('../assets/images/pb.png'),
     ]);
 
     const fontAssets = cacheFonts([

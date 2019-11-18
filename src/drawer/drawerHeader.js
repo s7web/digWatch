@@ -1,7 +1,8 @@
 import React from 'react';
-import { DrawerItems, NavigationActions } from 'react-navigation';
-import { View, Dimensions, Image, Linking } from 'react-native';
+import { DrawerItems, NavigationActions, Header } from 'react-navigation';
+import { View, Dimensions, Image, Linking, Text } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements';
+import { drawerHeaderStyle } from '../../assets/globalStyle/style.ios';
 
 const WINDOW_HEIGHT = Dimensions.get('window').height;
 const WINDOW_WIDTH = Dimensions.get('window').width;
@@ -17,12 +18,7 @@ export const CustomDrawerContentComponent = props => {
   };
 
   return (
-    <View
-      style={{
-        backgroundColor: 'white',
-        height: WINDOW_HEIGHT - 143,
-      }}
-    >
+    <View style={drawerHeaderStyle.menuHeight}>
       <View
         style={{
           marginLeft: 26,
@@ -69,6 +65,35 @@ export const CustomDrawerContentComponent = props => {
           name="instagram"
           type="font-awesome"
           color="lightgrey"
+        />
+      </View>
+      <View
+        style={{ position: 'absolute', bottom: 0, left: 12, marginBottom: 12 }}
+      >
+        <ListItem
+          style={{ width: WINDOW_WIDTH - 24 }}
+          key={0}
+          title={() => (
+            <View style={{ flexDirection: 'row', marginTop: 12 }}>
+              <Text>Application powered by </Text>
+              <Image
+                source={require('../../assets/images/pb.png')}
+                resizeMode="contain"
+                style={{
+                  width: 120,
+                  height: 41,
+                  position: 'relative',
+                  top: -12,
+                }}
+              />
+            </View>
+          )}
+          titleStyle={{
+            fontFamily: 'robotoRegular',
+            color: '#757575',
+            fontSize: 14,
+          }}
+          topDivider
         />
       </View>
     </View>
