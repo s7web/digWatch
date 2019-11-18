@@ -42,11 +42,15 @@ export default AboutPage = ({ navigation }) => {
       {content && (
         <>
           <Text style={styles.title}>{content.title}</Text>
-          <Text style={styles.body}>{content.body}</Text>
-          <Button
-            onPress={() => Linking.openURL(`mailto:${content.email}`)}
-            title={content.email}
-          />
+          <Text style={(styles.body, { paddingBottom: 30 })}>
+            {content.body}
+            <Text
+              style={styles.body}
+              onPress={() => Linking.openURL(`mailto:${content.email}`)}
+            >
+              {content.email}
+            </Text>
+          </Text>
         </>
       )}
     </ScrollView>
