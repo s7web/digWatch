@@ -1,0 +1,101 @@
+[2019-11-08 13:24:47] local.INFO: array (
+  0 => 
+  array (
+    'id' => 'aa47d00c-bcf7-438f-9e00-a2bb2ae3d24b',
+    'status' => 'error',
+    'message' => 'The recipient device is not registered with FCM.',
+    'details' => 
+    array (
+      'error' => 'DeviceNotRegistered',
+      'fault' => 'developer',
+    ),
+    'token' => 'ExponentPushToken[LswYCWLGwbSiJ50MHoPKEI]',
+  ),
+)  
+[2019-11-08 13:33:26] local.INFO: array (
+  0 => 
+  array (
+    'id' => '94b73e69-6295-4054-b49d-51cf4e2e0260',
+    'status' => 'error',
+    'message' => 'The recipient device is not registered with FCM.',
+    'details' => 
+    array (
+      'error' => 'DeviceNotRegistered',
+      'fault' => 'developer',
+    ),
+    'token' => 'ExponentPushToken[LswYCWLGwbSiJ50MHoPKEI]',
+  ),
+)  
+[2019-11-08 13:39:57] local.INFO: array (
+  0 => 
+  array (
+    'id' => 'f6854ce0-1b18-4fd8-96f4-663c51e8976a',
+    'status' => 'error',
+    'message' => 'The recipient device is not registered with FCM.',
+    'details' => 
+    array (
+      'error' => 'DeviceNotRegistered',
+      'fault' => 'developer',
+    ),
+    'token' => 'ExponentPushToken[LswYCWLGwbSiJ50MHoPKEI]',
+  ),
+)  
+[2019-11-08 13:42:35] local.INFO: array (
+  0 => 
+  array (
+    'id' => '1d47fcdc-d060-4dee-b6af-b353bec3944b',
+    'status' => 'error',
+    'message' => 'The recipient device is not registered with FCM.',
+    'details' => 
+    array (
+      'error' => 'DeviceNotRegistered',
+      'fault' => 'developer',
+    ),
+    'token' => 'ExponentPushToken[LswYCWLGwbSiJ50MHoPKEI]',
+  ),
+)  
+[2019-11-12 11:07:57] local.INFO: array (
+  0 => 
+  array (
+    'id' => 'eccac93c-aa9c-4be1-bb5c-19c875636874',
+    'status' => 'error',
+    'message' => 'The recipient device is not registered with FCM.',
+    'details' => 
+    array (
+      'error' => 'DeviceNotRegistered',
+      'fault' => 'developer',
+    ),
+    'token' => 'ExponentPushToken[xdveVpBQaiF-DhB95UFbOc]',
+  ),
+)  
+[2019-11-12 11:07:57] local.INFO: DELETED TOKEN ExponentPushToken[xdveVpBQaiF-DhB95UFbOc]  
+[2019-11-12 14:08:19] local.INFO: array (
+  0 => 
+  array (
+    'id' => '233a5f50-f1e1-46f8-8a5f-f21ef246ffa1',
+    'status' => 'error',
+    'message' => 'The recipient device is not registered with FCM.',
+    'details' => 
+    array (
+      'error' => 'DeviceNotRegistered',
+      'fault' => 'developer',
+    ),
+    'token' => 'ExponentPushToken[ImvCy6PuOhscAZDQHCJrwN]',
+  ),
+)  
+[2019-11-12 14:08:19] local.INFO: DELETED TOKEN ExponentPushToken[ImvCy6PuOhscAZDQHCJrwN]  
+[2019-11-12 14:26:28] local.INFO: array (
+  0 => 
+  array (
+    'id' => '08e8e839-ad38-4b9e-8f09-ac0e24e1ef00',
+    'status' => 'error',
+    'message' => 'The recipient device is not registered with FCM.',
+    'details' => 
+    array (
+      'error' => 'DeviceNotRegistered',
+      'fault' => 'developer',
+    ),
+    'token' => 'ExponentPushToken[-ksR0oEpHj1fbXT-43oM6_]',
+  ),
+)  
+[2019-11-12 14:26:28] local.INFO: DELETED TOKEN ExponentPushToken[-ksR0oEpHj1fbXT-43oM6_]  
