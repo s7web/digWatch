@@ -141,7 +141,27 @@ class TokenManagerController extends Controller
                 '_displayInForeground' => true,
             ];
 
-            dispatch(new SendPushNotificationsJob($interestDetails, $notification, $item->expo_token));
+            //dispatch(new SendPushNotificationsJob($interestDetails, $notification, $item->expo_token));
+
+            $expo = \ExponentPhpSDK\Expo::normalSetup();
+
+            //$interestDetails = $this->interestDetails;
+            //$notification = $this->notification;
+            $token = $item->expo_token;
+
+            $expo->subscribe($interestDetails[0], $interestDetails[1]);
+
+            $notify = $expo->notify($interestDetails[0], $notification, true);
+
+            if(isset($notify[0]['details']['error'])){
+
+                $notify[0]['token'] = $token;
+
+                Log::channel('notify-fail-log')->info($notify);
+                Log::channel('notify-fail-log')->info('DELETED TOKEN '.$token);
+
+                TokenStore::where('expo_token',$token)->delete();
+            }
 
 
         });
