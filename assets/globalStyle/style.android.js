@@ -8,7 +8,7 @@ export const drawerHeaderStyle = StyleSheet.create({
     width: 110,
   },
   logo: {
-    width: 110,
+    width: 111,
     position: 'absolute',
     left: SCREEN_WIDTH / 2 - 110,
   },

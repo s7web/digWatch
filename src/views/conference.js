@@ -30,6 +30,7 @@ export default class ConferenceDayScreen extends Component {
     //Parent data
     //this.props.navigation.state.params.conferenceData
     let conference = this.props.navigation.state.params.conferenceData;
+
     this.setState({ conference });
 
     const start = moment(conference.startdatetime);
@@ -77,6 +78,8 @@ export default class ConferenceDayScreen extends Component {
                         conferenceUuid: conference.uuid,
                         formatedDate: moment(l).format('dddd, D MMM'),
                         image: conference.image,
+                        shareUrl: conference.path,
+                        shareTitle: conference.title,
                       },
                     })
                   }

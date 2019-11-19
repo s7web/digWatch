@@ -7,8 +7,9 @@ import {
   TouchableOpacity,
   Dimensions,
   RefreshControl,
+  Share,
 } from 'react-native';
-import { ListItem, Input, Divider } from 'react-native-elements';
+import { ListItem, Input, Divider, Icon } from 'react-native-elements';
 import { ApiRequests, apiRoutes } from '../api/requests';
 import moment from 'moment';
 import { isCloseToBottom } from '../utils/scrollDetection';
@@ -25,6 +26,7 @@ export default class ConferenceDayScreen extends Component {
       conferenceDayList: false,
       conferenceData: {},
       refreshing: false,
+      formVisibility: false,
     };
   }
 
@@ -32,6 +34,7 @@ export default class ConferenceDayScreen extends Component {
     //Parent data
     //this.props.navigation.state.params.conferenceDayData
     let conferenceData = this.props.navigation.state.params.conferenceDayData;
+    console.log('WORKING DATA', conferenceData);
 
     this.setState({ conferenceData }, () => {
       this.handlePopulateData(0).then(conferenceDayList => {
@@ -72,13 +75,18 @@ export default class ConferenceDayScreen extends Component {
   };
 
   render() {
-    let { conferenceDayList, conferenceData, refreshing } = this.state;
+    let {
+      conferenceDayList,
+      conferenceData,
+      refreshing,
+      formVisibility,
+    } = this.state;
     let { push } = this.props.navigation;
 
     return (
       <View style={styles.container}>
         <View style={styles.containerForm}>
-          {conferenceDayList && (
+          {conferenceDayList && formVisibility && (
             <SearchForm
               confId={conferenceData.conferenceId}
               routeData={(searchKeyword, issueId) =>
@@ -94,15 +102,57 @@ export default class ConferenceDayScreen extends Component {
             />
           )}
 
-          <Divider style={styles.divider} />
-
           {conferenceData && (
-            <Text style={styles.title}>{conferenceData.formatedDate}</Text>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginTop: 22,
+              }}
+            >
+              <Text style={styles.title}>{conferenceData.formatedDate} </Text>
+              <Icon
+                name={this.state.formVisibility ? 'cross' : 'sound-mix'}
+                size={26}
+                type="entypo"
+                underlayColor={'white'}
+                iconStyle={{ paddingRight: 11, color: '#757575' }}
+                onPress={() =>
+                  this.setState({ formVisibility: !this.state.formVisibility })
+                }
+                containerStyle={{ position: 'relative', top: -3 }}
+              />
+            </View>
           )}
 
           <Divider style={styles.divider} />
 
           {!conferenceDayList && <Loader loading={true} />}
+
+          {conferenceDayList && (
+            <Icon
+              name={'share'}
+              size={29}
+              type="entypo"
+              underlayColor={'white'}
+              iconStyle={{
+                marginLeft: 12,
+                color: '#757575',
+                marginBottom: 12,
+              }}
+              containerStyle={{
+                textAlign: 'left',
+                display: 'flex',
+                alignItems: 'flex-start',
+              }}
+              onPress={async () =>
+                await Share.share({
+                  message: `${conferenceData.shareTitle} | ${conferenceData.shareUrl}`,
+                })
+              }
+            />
+          )}
 
           <ScrollView
             style={{ marginBottom: 12, marginTop: -10 }}
@@ -159,12 +209,11 @@ export default class ConferenceDayScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 12,
+
     paddingBottom: 12,
   },
   containerForm: {
     flex: 1,
-    paddingTop: 12,
     paddingBottom: 12,
   },
   listContainer: {
@@ -183,7 +232,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#757575',
     width: SCREEN_WIDTH - 22,
     marginLeft: 11,
-    marginBottom: 18,
+    marginBottom: 12,
     marginTop: 18,
   },
   title: {

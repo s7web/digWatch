@@ -1,7 +1,7 @@
 import React, { memo, useState, useEffect } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import { Input, Button, Icon } from 'react-native-elements';
-import { StyleSheet, Dimensions, Keyboard } from 'react-native';
+import { StyleSheet, Dimensions, Keyboard, View } from 'react-native';
 import { ApiRequests } from '../api/requests';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -29,59 +29,48 @@ const FormView = ({ confId, routeData }) => {
   };
 
   return (
-    <>
-      <Icon
-        name={'sound-mix'}
-        size={28}
-        type="entypo"
-        underlayColor={'white'}
-        iconStyle={{ paddingRight: 10, color: '#757575' }}
-        onPress={() => setFormVisibility(!formVisibility)}
-        containerStyle={{ alignItems: 'flex-end', marginBottom: 2 }}
+    <View
+      style={{ backgroundColor: '#f4f4f4', paddingTop: 12, paddingBottom: 18 }}
+    >
+      <Input
+        inputContainerStyle={{
+          borderBottomWidth: 0,
+        }}
+        value={form['keyword'] && form.keyword}
+        containerStyle={styles.input}
+        inputStyle={{ fontFamily: 'robotoRegular', fontSize: 16 }}
+        placeholder="Search"
+        onChangeText={text => {
+          let formData = { ...form };
+          formData['keyword'] = text;
+          setForm(formData);
+        }}
       />
-      {formVisibility && (
-        <>
-          <Input
-            inputContainerStyle={{
-              borderBottomWidth: 0,
-            }}
-            value={form['keyword'] && form.keyword}
-            containerStyle={styles.input}
-            inputStyle={{ fontFamily: 'robotoRegular', fontSize: 16 }}
-            placeholder="Search"
-            onChangeText={text => {
-              let formData = { ...form };
-              formData['keyword'] = text;
-              setForm(formData);
-            }}
-          />
 
-          {issues && (
-            <RNPickerSelect
-              placeholder={placeholder}
-              onValueChange={value => {
-                let formData = { ...form };
-                formData['issueId'] = value;
-                setForm(formData);
-              }}
-              style={{ ...pickerSelectStyles }}
-              useNativeAndroidPickerStyle={false}
-              items={issues.map(issue => {
-                return { label: issue.issuetitle, value: issue.issueid };
-              })}
-            />
-          )}
-
-          <Button
-            title="OK"
-            type="clear"
-            buttonStyle={styles.button}
-            titleStyle={{ color: '#757778', fontFamily: 'robotoRegular' }}
-            onPress={() => handleSubmit()}
-          />
-        </>
+      {issues && (
+        <RNPickerSelect
+          placeholder={placeholder}
+          onValueChange={value => {
+            let formData = { ...form };
+            formData['issueId'] = value;
+            setForm(formData);
+          }}
+          style={{ ...pickerSelectStyles }}
+          useNativeAndroidPickerStyle={false}
+          items={issues.map(issue => {
+            return { label: issue.issuetitle, value: issue.issueid };
+          })}
+        />
       )}
-    </>
+
+      <Button
+        title="OK"
+        type="clear"
+        buttonStyle={styles.button}
+        titleStyle={{ color: '#757778', fontFamily: 'robotoRegular' }}
+        onPress={() => handleSubmit()}
+      />
+    </View>
   );
 };
 

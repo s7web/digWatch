@@ -75,7 +75,9 @@ export const CustomDrawerContentComponent = props => {
           key={0}
           title={() => (
             <View style={{ flexDirection: 'row', marginTop: 12 }}>
-              <Text>Application powered by </Text>
+              <Text style={{ fontFamily: 'robotoRegular' }}>
+                Application powered by{' '}
+              </Text>
               <Image
                 source={require('../../assets/images/pb.png')}
                 resizeMode="contain"

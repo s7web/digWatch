@@ -24,12 +24,16 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.Diplo.Diplo",
-      "icon": "./digwatch-icon.png"
+      "icon": "./digwatch-icon.png",
+      "infoPlist": {
+        "NSNotification": "Dig Watch would like to send you notification"
+      }
     },
     "android": {
       "package": "com.Diplo.Diplo",
       "versionCode": 1,
-      "icon": "./digwatch-icon.png"
+      "icon": "./digwatch-icon.png",
+      "permissions": ["NOTIFICATIONS"]
     }
   }
 }

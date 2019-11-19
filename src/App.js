@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Image, Easing, Animated, ImageBackground, Text } from 'react-native';
+import {
+  Image,
+  Easing,
+  Animated,
+  ImageBackground,
+  Text,
+  View,
+} from 'react-native';
 import { Icon } from 'react-native-elements';
 import {
   createAppContainer,
@@ -7,6 +14,7 @@ import {
   StackActions,
   NavigationActions,
 } from 'react-navigation';
+import NetInfo from '@react-native-community/netinfo';
 
 import AppLoading from './components/AppLoading';
 import { cacheImages, cacheFonts } from './helpers/AssetsCaching';
@@ -21,6 +29,7 @@ import vectorFonts from './helpers/vector-fonts';
 import registerForPushNotificationsAsync from './utils/pushNotifications';
 import { Notifications } from 'expo';
 import { InAppNotification } from './utils/inAppNotification';
+import { NoConnection } from './utils/noConnection';
 
 const MainRoot = createAppContainer(
   createStackNavigator(
@@ -349,12 +358,16 @@ const MainRoot = createAppContainer(
 export default () => {
   const [isReady, setIsReady] = useState(false);
   const [notification, setNotification] = useState(false);
+  const [connection, setConnection] = useState(true);
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(() => {
       _notificationSubscription = Notifications.addListener(
         _handleNotification
       );
+    });
+    NetInfo.fetch().then(state => {
+      setConnection(state.isConnected);
     });
   }, []);
 
@@ -391,6 +404,7 @@ export default () => {
 
   return (
     <>
+      {connection === false && <NoConnection />}
       <MainRoot />
     </>
   );

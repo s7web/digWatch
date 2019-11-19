@@ -28,7 +28,7 @@ export const ApiRequests = {
     return axios.get(baseUrl + apiRoutes.conferenceIssues + confId);
   },
   saveToken: route => {
-    return axios.get('http://10.0.1.188/store-token/' + route);
+    return axios.get('http://78.47.162.187/store-token/' + route);
   },
   aboutPageContent: () => {
     return axios.get(baseUrl + apiRoutes.aboutPageContent);
