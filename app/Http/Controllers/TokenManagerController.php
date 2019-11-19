@@ -39,7 +39,7 @@ class TokenManagerController extends Controller
         $data = $request->only('title', 'subtitle', 'body');
 
 
-        $res = $client->get('http://notification-centar.test/dispatch-notifications?title='.$data['title'].'&subtitle='.$data['subtitle'].'&body='.$data['body'].'&token='.$request->cookie('key').'');
+        $res = $client->get('http://78.47.162.187/dispatch-notifications?title='.$data['title'].'&subtitle='.$data['subtitle'].'&body='.$data['body'].'&token='.$request->cookie('key').'');
 
         $response = $res->getBody();
 
