@@ -55,25 +55,25 @@ class SendPushNotificationsJob extends Job
      */
     public function handle()
     {
-        echo "WORKS LIKE A CHARM";
-//        $expo = \ExponentPhpSDK\Expo::normalSetup();
-//
-//        $interestDetails = $this->interestDetails;
-//        $notification = $this->notification;
-//        $token = $this->token;
-//
-//        $expo->subscribe($interestDetails[0], $interestDetails[1]);
-//
-//        $notify = $expo->notify($interestDetails[0], $notification, true);
-//
-//        if(isset($notify[0]['details']['error'])){
-//
-//            $notify[0]['token'] = $token;
-//
-//            Log::channel('notify-fail-log')->info($notify);
-//            Log::channel('notify-fail-log')->info('DELETED TOKEN '.$token);
-//
-//            TokenStore::where('expo_token',$token)->delete();
-//        }
+
+        $expo = \ExponentPhpSDK\Expo::normalSetup();
+
+        $interestDetails = $this->interestDetails;
+        $notification = $this->notification;
+        $token = $this->token;
+
+        $expo->subscribe($interestDetails[0], $interestDetails[1]);
+
+        $notify = $expo->notify($interestDetails[0], $notification, true);
+
+        if(isset($notify[0]['details']['error'])){
+
+            $notify[0]['token'] = $token;
+
+            Log::channel('notify-fail-log')->info($notify);
+            Log::channel('notify-fail-log')->info('DELETED TOKEN '.$token);
+
+            TokenStore::where('expo_token',$token)->delete();
+        }
     }
 }
