@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Dimensions,
   RefreshControl,
-  Share,
 } from 'react-native';
 import { ListItem, Input, Divider, Icon } from 'react-native-elements';
 import { ApiRequests, apiRoutes } from '../api/requests';
@@ -130,30 +129,6 @@ export default class ConferenceDayScreen extends Component {
 
           {!conferenceDayList && <Loader loading={true} />}
 
-          {conferenceDayList && (
-            <Icon
-              name={'share'}
-              size={29}
-              type="entypo"
-              underlayColor={'white'}
-              iconStyle={{
-                marginLeft: 12,
-                color: '#757575',
-                marginBottom: 12,
-              }}
-              containerStyle={{
-                textAlign: 'left',
-                display: 'flex',
-                alignItems: 'flex-start',
-              }}
-              onPress={async () =>
-                await Share.share({
-                  message: `${conferenceData.shareTitle} | ${conferenceData.shareUrl}`,
-                })
-              }
-            />
-          )}
-
           <ScrollView
             style={{ marginBottom: 12, marginTop: -10 }}
             refreshControl={
@@ -179,6 +154,7 @@ export default class ConferenceDayScreen extends Component {
                         image: conferenceData.image,
                         uuid: l.uuid,
                         conferenceId: conferenceData.conferenceId,
+                        eventTitle: conferenceData.shareTitle,
                       },
                     })
                   }

@@ -7,8 +7,9 @@ import {
   Linking,
   Dimensions,
   Image,
+  Share,
 } from 'react-native';
-import { Divider } from 'react-native-elements';
+import { Divider, Icon } from 'react-native-elements';
 import HTML from 'react-native-render-html';
 import { Loader } from '../utils/loader';
 import { ApiRequests, apiRoutes } from '../api/requests';
@@ -34,8 +35,10 @@ export default class ConferenceIssueScreen extends Component {
     ApiRequests.conferencesDayReport(
       apiRoutes.conferencesDayReport + conferenceIssueData.uuid
     ).then(dayReport => {
+      console.log('WORKING DATA', dayReport);
       conferenceIssueData.body =
         dayReport.data.data.attributes.field_report_text.processed;
+      conferenceIssueData.path = dayReport.data.data.attributes.path;
 
       this.setState({ conferenceIssueData });
     });
@@ -47,7 +50,7 @@ export default class ConferenceIssueScreen extends Component {
 
   render() {
     let { conferenceIssueData } = this.state;
-
+    console.log('CLOG DATA', conferenceIssueData);
     return (
       <View style={styles.container}>
         <View style={styles.container}>
@@ -81,6 +84,28 @@ export default class ConferenceIssueScreen extends Component {
               </View>
 
               <Divider style={styles.divider} />
+
+              {conferenceIssueData.path != undefined && (
+                <Icon
+                  name={'share'}
+                  size={29}
+                  type="entypo"
+                  underlayColor={'white'}
+                  iconStyle={{
+                    marginLeft: 12,
+                    color: '#757575',
+                  }}
+                  containerStyle={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                  }}
+                  onPress={async () =>
+                    await Share.share({
+                      message: `${conferenceIssueData.eventTitle} - ${conferenceIssueData.formatedDate} ${conferenceIssueData.time} | https://dig.watch${conferenceIssueData.path.alias}`,
+                    })
+                  }
+                />
+              )}
 
               <ScrollView
                 style={{

@@ -1,6 +1,13 @@
 import React from 'react';
 import { DrawerItems, NavigationActions, Header } from 'react-navigation';
-import { View, Dimensions, Image, Linking, Text } from 'react-native';
+import {
+  View,
+  Dimensions,
+  Image,
+  Linking,
+  Text,
+  TouchableHighlight,
+} from 'react-native';
 import { ListItem, Icon } from 'react-native-elements';
 import { drawerHeaderStyle } from '../../assets/globalStyle/style.ios';
 
@@ -19,18 +26,20 @@ export const CustomDrawerContentComponent = props => {
 
   return (
     <View style={drawerHeaderStyle.menuHeight}>
-      <View
+      <TouchableHighlight
+        underlayColor={'white'}
         style={{
           marginLeft: 26,
           marginTop: 22,
         }}
+        onPress={() => Linking.openURL(`https://dig.watch/`)}
       >
         <Image
           source={require('../../assets/images/logo/mainlogo.png')}
           style={{ width: 90, height: 60 }}
           resizeMode="contain"
         />
-      </View>
+      </TouchableHighlight>
       <View style={{ marginLeft: 12 }}>
         <DrawerItems {...props} />
       </View>
@@ -46,25 +55,34 @@ export const CustomDrawerContentComponent = props => {
           name="facebook-square"
           type="font-awesome"
           color="lightgrey"
-          onPress={() => Linking.openURL(`https://www.facebook.com`)}
+          onPress={() =>
+            Linking.openURL(`https://www.facebook.com/GenevaInternetPlatform/`)
+          }
         />
         <Icon
           containerStyle={{ margin: 10, padding: 4 }}
           name="twitter"
           type="font-awesome"
           color="lightgrey"
+          onPress={() => Linking.openURL(`https://twitter.com/GenevaGIP`)}
         />
         <Icon
           containerStyle={{ margin: 10, padding: 4 }}
           name="linkedin"
           type="font-awesome"
           color="lightgrey"
+          onPress={() =>
+            Linking.openURL(`https://www.linkedin.com/company/diplofoundation/`)
+          }
         />
         <Icon
           containerStyle={{ margin: 10, padding: 4 }}
           name="instagram"
           type="font-awesome"
           color="lightgrey"
+          onPress={() =>
+            Linking.openURL(`https://www.instagram.com/diplofoundation/`)
+          }
         />
       </View>
       <View

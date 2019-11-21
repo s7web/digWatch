@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "Dig Watch",
-    "slug": "Dig-Watch-mobile-app",
+    "name": "DW Just-in-Time Reporting",
+    "slug": "dig-watch",
     "version": "1.0.0",
-    "description": "Diplodokus",
+    "description": "DW Just-in-Time Reporting",
     "privacy": "public",
     "sdkVersion": "34.0.0",
     "platforms": ["ios", "android"],
