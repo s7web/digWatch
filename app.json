@@ -2,11 +2,14 @@
   "expo": {
     "name": "DW Just-in-Time Reporting",
     "slug": "dig-watch",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "DW Just-in-Time Reporting",
     "privacy": "public",
-    "sdkVersion": "34.0.0",
-    "platforms": ["ios", "android"],
+    "sdkVersion": "35.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "orientation": "portrait",
     "primaryColor": "#cccccc",
     "icon": "./digwatch-icon.png",
@@ -20,7 +23,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.diplo.digwatch",
@@ -33,7 +38,9 @@
       "package": "com.Dig.Watch",
       "versionCode": 2,
       "icon": "./digwatch-icon.png",
-      "permissions": ["NOTIFICATIONS"]
+      "permissions": [
+        "NOTIFICATIONS"
+      ]
     }
   }
 }
