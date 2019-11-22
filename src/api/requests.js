@@ -6,6 +6,7 @@ export const apiRoutes = {
   conferences: '/appconferences?page=',
   conferencesDay: '/appsessions4conferencegroupedbyday/',
   conferencesDayReport: '/jsonapi/node/conference_sessions/',
+  conferencesSessionDayReport: '/appconferencesessiondetails/',
   conferencesSearch: '/appconferencesessions/',
   aboutPageContent: '/appaboutjit',
   conferenceIssues: '/appissues4conference/',

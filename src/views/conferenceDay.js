@@ -33,7 +33,6 @@ export default class ConferenceDayScreen extends Component {
     //Parent data
     //this.props.navigation.state.params.conferenceDayData
     let conferenceData = this.props.navigation.state.params.conferenceDayData;
-    console.log('WORKING DATA', conferenceData);
 
     this.setState({ conferenceData }, () => {
       this.handlePopulateData(0).then(conferenceDayList => {
@@ -95,6 +94,7 @@ export default class ConferenceDayScreen extends Component {
                     issueId: issueId,
                     image: conferenceData.image,
                     keyword: searchKeyword,
+                    eventTitle: conferenceData.shareTitle,
                   },
                 })
               }
@@ -155,6 +155,7 @@ export default class ConferenceDayScreen extends Component {
                         uuid: l.uuid,
                         conferenceId: conferenceData.conferenceId,
                         eventTitle: conferenceData.shareTitle,
+                        sessionid: l.sessionid,
                       },
                     })
                   }
@@ -169,7 +170,9 @@ export default class ConferenceDayScreen extends Component {
                         ).format('HH:mm')} - ${moment(l.enddatetime).format(
                           'HH:mm'
                         )}`}</Text>
-                        <Text style={styles.titleList}>{l.title}</Text>
+                        <Text style={styles.titleList}>
+                          {l.title.split('&#039;').join("'")}
+                        </Text>
                       </View>
                     }
                   />

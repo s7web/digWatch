@@ -10,7 +10,6 @@ import {
   Share,
 } from 'react-native';
 import { Divider, Icon } from 'react-native-elements';
-import HTML from 'react-native-render-html';
 import { Loader } from '../utils/loader';
 import { ApiRequests, apiRoutes } from '../api/requests';
 
@@ -33,12 +32,11 @@ export default class ConferenceIssueScreen extends Component {
       .conferenceIssueData;
 
     ApiRequests.conferencesDayReport(
-      apiRoutes.conferencesDayReport + conferenceIssueData.uuid
+      apiRoutes.conferencesSessionDayReport + conferenceIssueData.sessionid
     ).then(dayReport => {
-      console.log('WORKING DATA', dayReport);
-      conferenceIssueData.body =
-        dayReport.data.data.attributes.field_report_text.processed;
-      conferenceIssueData.path = dayReport.data.data.attributes.path;
+      conferenceIssueData.body = dayReport.data.rows[0].reporttext;
+      conferenceIssueData.path = dayReport.data.rows[0].path;
+      console.log('SESSION STORE ', conferenceIssueData);
 
       this.setState({ conferenceIssueData });
     });
@@ -50,7 +48,6 @@ export default class ConferenceIssueScreen extends Component {
 
   render() {
     let { conferenceIssueData } = this.state;
-    console.log('CLOG DATA', conferenceIssueData);
     return (
       <View style={styles.container}>
         <View style={styles.container}>
@@ -78,7 +75,7 @@ export default class ConferenceIssueScreen extends Component {
                   </Text>
                   <Text style={styles.title}>{conferenceIssueData.time}</Text>
                   <Text style={styles.subtitle}>
-                    {conferenceIssueData.title}
+                    {conferenceIssueData.title.split('&#039;').join("'")}
                   </Text>
                 </View>
               </View>
@@ -101,7 +98,13 @@ export default class ConferenceIssueScreen extends Component {
                   }}
                   onPress={async () =>
                     await Share.share({
-                      message: `${conferenceIssueData.eventTitle} - ${conferenceIssueData.formatedDate} ${conferenceIssueData.time} | https://dig.watch${conferenceIssueData.path.alias}`,
+                      message: `${
+                        conferenceIssueData.eventTitle
+                      } - ${conferenceIssueData.title
+                        .split('&#039;')
+                        .join("'")} -  ${conferenceIssueData.formatedDate} ${
+                        conferenceIssueData.time
+                      } | https://dig.watch${conferenceIssueData.path.alias}`,
                     })
                   }
                 />
@@ -115,18 +118,15 @@ export default class ConferenceIssueScreen extends Component {
                   paddingRight: 12,
                 }}
               >
-                <HTML
-                  html={conferenceIssueData.body}
-                  imagesMaxWidth={Dimensions.get('window').width}
-                  onLinkPress={(evt, href, htmlAttribs) =>
-                    this.handleLinkOpen(href)
-                  }
-                  baseFontStyle={{
+                <Text
+                  style={{
                     fontSize: 14,
                     fontFamily: 'robotoRegular',
                     color: '#414040',
                   }}
-                />
+                >
+                  {conferenceIssueData.body}
+                </Text>
               </ScrollView>
             </>
           )}

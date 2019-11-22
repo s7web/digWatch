@@ -31,9 +31,6 @@ export default AboutPage = ({ navigation }) => {
       data.body = data.body.split('-split-');
       data.body = data.body[0];
       data.email = data.email.toString();
-
-      console.log('email', data);
-
       setContent(data);
     });
   }, []);
@@ -61,6 +58,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 12,
+    marginBottom: 20,
   },
   title: {
     fontSize: 20,

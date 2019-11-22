@@ -98,6 +98,7 @@ export default class ConferenceSearch extends Component {
                         image: conferenceSearch.image,
                         uuid: l.uuid,
                         conferenceId: conferenceSearch.conferenceId,
+                        eventTitle: conferenceSearch.eventTitle,
                       },
                     })
                   }
