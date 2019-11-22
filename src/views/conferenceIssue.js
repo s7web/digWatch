@@ -36,7 +36,6 @@ export default class ConferenceIssueScreen extends Component {
     ).then(dayReport => {
       conferenceIssueData.body = dayReport.data.rows[0].reporttext;
       conferenceIssueData.path = dayReport.data.rows[0].path;
-      console.log('SESSION STORE ', conferenceIssueData);
 
       this.setState({ conferenceIssueData });
     });

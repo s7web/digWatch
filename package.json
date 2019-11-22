@@ -40,7 +40,6 @@
     "react-native-picker-select": "^6.3.3",
     "react-native-touchable-scale": "^2.0.0",
     "react-native-unimodules": "0.5.2",
-    "react-native-web": "^0.11.4",
     "react-navigation": "^3.11.1",
     "react-wow": "^1.0.0",
     "rn-sliding-up-panel": "^2.3.3"
