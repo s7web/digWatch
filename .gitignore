@@ -13,3 +13,9 @@ npm-debug.*
 yarn.lock
 
 beta
+vendor
+.idea
+Homestead.json
+Homestead.yaml
+.env
+.phpunit.result.cache
