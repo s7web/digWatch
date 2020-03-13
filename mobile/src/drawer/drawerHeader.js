@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerItems, NavigationActions, Header } from 'react-navigation';
+import { DrawerItems } from 'react-navigation';
 import {
   View,
   Dimensions,
@@ -9,33 +9,25 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements';
-import { drawerHeaderStyle } from '../../assets/globalStyle/style.ios';
 
-const WINDOW_HEIGHT = Dimensions.get('window').height;
+import { drawerHeaderStyle } from '../../assets/globalStyle/style.ios';
+import imgSource from '../../assets/images/logo/mainlogo.png';
+
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
-export const CustomDrawerContentComponent = props => {
-  const navigateToScreen = route => () => {
-    const navigateAction = NavigationActions.navigate({
-      routeName: 'Landing',
-      params: {},
-      action: NavigationActions.navigate({ routeName: route }),
-    });
-    props.navigation.dispatch(navigateAction);
-  };
-
+export const CustomDrawerContentComponent = (props) => {
   return (
     <View style={drawerHeaderStyle.menuHeight}>
       <TouchableHighlight
-        underlayColor={'white'}
+        underlayColor="white"
         style={{
           marginLeft: 26,
           marginTop: 22,
         }}
-        onPress={() => Linking.openURL(`https://dig.watch/`)}
+        onPress={() => Linking.openURL('https://dig.watch/')}
       >
         <Image
-          source={require('../../assets/images/logo/mainlogo.png')}
+          source={imgSource}
           style={{ width: 90, height: 60 }}
           resizeMode="contain"
         />
@@ -55,49 +47,45 @@ export const CustomDrawerContentComponent = props => {
           name="facebook-square"
           type="font-awesome"
           color="lightgrey"
-          onPress={() =>
-            Linking.openURL(`https://www.facebook.com/GenevaInternetPlatform/`)
-          }
+          onPress={() => Linking.openURL('https://www.facebook.com/GenevaInternetPlatform/')}
         />
         <Icon
           containerStyle={{ margin: 10, padding: 4 }}
           name="twitter"
           type="font-awesome"
           color="lightgrey"
-          onPress={() => Linking.openURL(`https://twitter.com/GenevaGIP`)}
+          onPress={() => Linking.openURL('https://twitter.com/GenevaGIP')}
         />
         <Icon
           containerStyle={{ margin: 10, padding: 4 }}
           name="linkedin"
           type="font-awesome"
           color="lightgrey"
-          onPress={() =>
-            Linking.openURL(`https://www.linkedin.com/company/diplofoundation/`)
-          }
+          onPress={() => Linking.openURL('https://www.linkedin.com/company/diplofoundation/')}
         />
         <Icon
           containerStyle={{ margin: 10, padding: 4 }}
           name="instagram"
           type="font-awesome"
           color="lightgrey"
-          onPress={() =>
-            Linking.openURL(`https://www.instagram.com/diplofoundation/`)
-          }
+          onPress={() => Linking.openURL('https://www.instagram.com/diplofoundation/')}
         />
       </View>
       <View
-        style={{ position: 'absolute', bottom: 0, left: 12, marginBottom: 12 }}
+        style={{
+          position: 'absolute', bottom: 0, left: 12, marginBottom: 12
+        }}
       >
         <ListItem
           style={{ width: WINDOW_WIDTH - 24 }}
           key={0}
-          title={() => (
+          title={(
             <View style={{ flexDirection: 'row', marginTop: 12 }}>
               <Text style={{ fontFamily: 'robotoRegular' }}>
-                Application powered by{' '}
+                Application powered by
               </Text>
               <Image
-                source={require('../../assets/images/pb.png')}
+                source={imgSource}
                 resizeMode="contain"
                 style={{
                   width: 120,
@@ -121,17 +109,14 @@ export const CustomDrawerContentComponent = props => {
 };
 
 export const navigationOptions = (title, lastItem = false) => ({
-  drawerLabel: () =>
-    title == null ? (
-      title
-    ) : (
-      <ListItem
-        style={{ width: WINDOW_WIDTH - 24 }}
-        key={0}
-        title={title}
-        titleStyle={{ fontFamily: 'robotoRegular', color: '#757575' }}
-        topDivider
-        bottomDivider={lastItem}
-      />
-    ),
+  drawerLabel: () => (
+    <ListItem
+      style={{ width: WINDOW_WIDTH - 24 }}
+      key={0}
+      title={title}
+      titleStyle={{ fontFamily: 'robotoRegular', color: '#757575' }}
+      topDivider
+      bottomDivider={lastItem}
+    />
+  ),
 });

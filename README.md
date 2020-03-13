@@ -19,9 +19,17 @@ Check package.json for available scripts.
 
 Use `yarn` ONLY for modules installation don't use `yarn <script_name>` instead use `npm run <script name>`
 
-Note: build for web not working needs tweeking `npm run web`
+To prevent GCM warning make sure you are logged in to expo account by running `expo login`
+
+After that run `npm run start` and pick an option from newely opened browser tab i.e. 'Run on Android device/emulator' etc.
+
+Note: build for web not working `npm run web` script is removed
 
 <dl>
+    <dt>For Android</dt>
+        <dd>In Metro Bundler pick `Run on iOS simulator`</dd>
+        <dd>To simulate home button `⌘+⇧+H` type `H` twice to open application list </dd>
+
     <dt>On MacOS</dt>
         <dd>In Metro Bundler pick `Run on iOS simulator`</dd>
         <dd>To simulate home button `⌘+⇧+H` type `H` twice to open application list </dd>
