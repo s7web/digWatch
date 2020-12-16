@@ -19,3 +19,4 @@ Homestead.json
 Homestead.yaml
 .env
 .phpunit.result.cache
+mobile/package-lock.json
