@@ -8,12 +8,18 @@ import {
   View,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
+// import {
+//   createAppContainer,
+//   createStackNavigator,
+//   StackActions,
+//   NavigationActions,
+// } from 'react-navigation';
+import { createStackNavigator, StackActions } from '@react-navigation/stack';
 import {
-  createAppContainer,
-  createStackNavigator,
-  StackActions,
   NavigationActions,
-} from 'react-navigation';
+  createAppContainer,
+} from '@react-navigation/native';
+
 import NetInfo from '@react-native-community/netinfo';
 
 import AppLoading from './components/AppLoading';
@@ -366,12 +372,12 @@ export default () => {
         _handleNotification
       );
     });
-    NetInfo.fetch().then(state => {
+    NetInfo.fetch().then((state) => {
       setConnection(state.isConnected);
     });
   }, []);
 
-  _handleNotification = notification => {};
+  _handleNotification = (notification) => {};
 
   const loadAssetsAsync = async () => {
     const imageAssets = cacheImages([

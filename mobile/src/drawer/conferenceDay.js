@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
-import { createDrawerNavigator } from 'react-navigation';
+// import { createDrawerNavigator } from 'react-navigation';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import ConferenceDay from '../views/conferenceDay';
 import { CustomDrawerContentComponent } from './drawerHeader';

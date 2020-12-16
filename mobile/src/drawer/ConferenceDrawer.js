@@ -1,5 +1,6 @@
 import React from 'react';
-import { createStackNavigator } from 'react-navigation-stack';
+// import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { Icon, Text } from 'react-native-elements';
 import { Image } from 'react-native';
 import { NavigationActions } from 'react-navigation';

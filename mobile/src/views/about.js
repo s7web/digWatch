@@ -7,7 +7,9 @@ import {
   Button,
   Linking,
 } from 'react-native';
-import { StackActions, NavigationActions } from 'react-navigation';
+// import { StackActions, NavigationActions } from 'react-navigation';
+import { StackActions } from '@react-navigation/stack';
+import { NavigationActions } from '@react-navigation/native';
 import { ApiRequests } from '../api/requests';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -20,7 +22,7 @@ export default AboutPage = ({ navigation }) => {
       navigation.push('About', { once: true });
     }
 
-    ApiRequests.aboutPageContent().then(content => {
+    ApiRequests.aboutPageContent().then((content) => {
       let data = content['data']['rows'][0];
 
       data.email = data.body.match(
