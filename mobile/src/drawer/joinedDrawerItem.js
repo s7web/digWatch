@@ -1,5 +1,5 @@
 import React from 'react';
-import { createDrawerNavigator } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { Dimensions, Easing, Animated } from 'react-native';
 import Events from '../views/events';
 import Conference from '../views/conference';
@@ -18,7 +18,7 @@ const EmptyDrawer = () => {
   return null;
 };
 
-export const JoinedMenuWrapper = startPage => {
+export const JoinedMenuWrapper = (startPage) => {
   const JoinedMenuDrawer = createDrawerNavigator(
     {
       About: {
