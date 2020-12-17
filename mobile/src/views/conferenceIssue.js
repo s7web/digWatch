@@ -12,6 +12,9 @@ import {
 import { Divider, Icon } from 'react-native-elements';
 import { Loader } from '../utils/loader';
 import { ApiRequests, apiRoutes } from '../api/requests';
+import PLACEHOLDER_IMAGE from '../../assets/images/placeholder.jpg';
+
+const uri = Image.resolveAssetSource(PLACEHOLDER_IMAGE).uri;
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -33,7 +36,7 @@ export default class ConferenceIssueScreen extends Component {
 
     ApiRequests.conferencesDayReport(
       apiRoutes.conferencesSessionDayReport + conferenceIssueData.sessionid
-    ).then(dayReport => {
+    ).then((dayReport) => {
       conferenceIssueData.body = dayReport.data.rows[0].reporttext;
       conferenceIssueData.path = dayReport.data.rows[0].path;
 
@@ -41,7 +44,7 @@ export default class ConferenceIssueScreen extends Component {
     });
   }
 
-  handleLinkOpen = href => {
+  handleLinkOpen = (href) => {
     Linking.openURL(href);
   };
 
@@ -59,7 +62,10 @@ export default class ConferenceIssueScreen extends Component {
               <View style={{ flexDirection: 'row', alignSelf: 'flex-start' }}>
                 <Image
                   source={{
-                    uri: conferenceIssueData.image,
+                    uri:
+                      conferenceIssueData.image !== ''
+                        ? conferenceIssueData.image
+                        : uri,
                   }}
                   style={{
                     width: 100,
