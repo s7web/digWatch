@@ -12,6 +12,7 @@ import {
 import { Divider, Icon } from 'react-native-elements';
 import { Loader } from '../utils/loader';
 import { ApiRequests, apiRoutes } from '../api/requests';
+import HTML from 'react-native-render-html';
 import PLACEHOLDER_IMAGE from '../../assets/images/placeholder.jpg';
 
 const uri = Image.resolveAssetSource(PLACEHOLDER_IMAGE).uri;
@@ -123,15 +124,14 @@ export default class ConferenceIssueScreen extends Component {
                   paddingRight: 12,
                 }}
               >
-                <Text
-                  style={{
+                <HTML
+                  baseFontStyle={{
                     fontSize: 14,
                     fontFamily: 'robotoRegular',
                     color: '#414040',
                   }}
-                >
-                  {conferenceIssueData.body}
-                </Text>
+                  source={{ html: conferenceIssueData.body }}
+                />
               </ScrollView>
             </>
           )}
