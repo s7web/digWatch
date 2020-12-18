@@ -118,14 +118,15 @@ export const CustomDrawerContentComponent = (props) => {
 };
 
 export const navigationOptions = (title, lastItem = false) => ({
-  drawerLabel: () => (
-    <ListItem
-      style={{ width: WINDOW_WIDTH - 24 }}
-      key={0}
-      title={title}
-      titleStyle={{ fontFamily: 'robotoRegular', color: '#757575' }}
-      topDivider
-      bottomDivider={lastItem}
-    />
-  ),
+  drawerLabel: () =>
+    title && (
+      <ListItem
+        style={{ width: WINDOW_WIDTH - 24 }}
+        key={0}
+        title={title}
+        titleStyle={{ fontFamily: 'robotoRegular', color: '#757575' }}
+        topDivider
+        bottomDivider={lastItem}
+      />
+    ),
 });
