@@ -51,8 +51,8 @@ export default class EventsScreen extends Component {
       this.handlePopulateData(0).then((conferences) => {
         conferences = conferences['data']['rows'];
         this.setState({ conferences });
-        this.setState({ loading: false });
       });
+      this.setState({ loading: false });
     }
     this.setState({ appState: nextAppState });
   };
