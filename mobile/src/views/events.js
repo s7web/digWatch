@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   RefreshControl,
+  AppState,
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { ApiRequests, apiRoutes } from '../api/requests';
@@ -25,6 +26,7 @@ export default class EventsScreen extends Component {
       conferences: false,
       refreshing: false,
       blockInfinite: false,
+      appState: AppState.currentState,
     };
   }
 
@@ -33,7 +35,27 @@ export default class EventsScreen extends Component {
       conferences = conferences['data']['rows'];
       this.setState({ conferences });
     });
+    AppState.addEventListener('change', this._handleAppStateChange);
   }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  _handleAppStateChange = (nextAppState) => {
+    if (
+      this.state.appState.match(/inactive|background/) &&
+      nextAppState === 'active'
+    ) {
+      this.setState({ loading: true });
+      this.handlePopulateData(0).then((conferences) => {
+        conferences = conferences['data']['rows'];
+        this.setState({ conferences });
+        this.setState({ loading: false });
+      });
+    }
+    this.setState({ appState: nextAppState });
+  };
 
   handlePopulateData = async (page) => {
     return await ApiRequests.conferences(apiRoutes.conferences + page);
