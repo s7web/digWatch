@@ -7,11 +7,15 @@ import {
   TouchableOpacity,
   Image,
   RefreshControl,
+  AppState,
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { ApiRequests, apiRoutes } from '../api/requests';
 import { Loader } from '../utils/loader';
 import { isCloseToBottom } from '../utils/scrollDetection';
+import PLACEHOLDER_IMAGE from '../../assets/images/placeholder.jpg';
+
+const uri = Image.resolveAssetSource(PLACEHOLDER_IMAGE).uri;
 
 export default class EventsScreen extends Component {
   constructor(props) {
@@ -22,17 +26,38 @@ export default class EventsScreen extends Component {
       conferences: false,
       refreshing: false,
       blockInfinite: false,
+      appState: AppState.currentState,
     };
   }
 
   componentDidMount() {
-    this.handlePopulateData(0).then(conferences => {
+    this.handlePopulateData(0).then((conferences) => {
       conferences = conferences['data']['rows'];
       this.setState({ conferences });
     });
+    AppState.addEventListener('change', this._handleAppStateChange);
   }
 
-  handlePopulateData = async page => {
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  _handleAppStateChange = (nextAppState) => {
+    if (
+      this.state.appState.match(/inactive|background/) &&
+      nextAppState === 'active'
+    ) {
+      this.setState({ loading: true });
+      this.handlePopulateData(0).then((conferences) => {
+        conferences = conferences['data']['rows'];
+        this.setState({ conferences });
+      });
+      this.setState({ loading: false });
+    }
+    this.setState({ appState: nextAppState });
+  };
+
+  handlePopulateData = async (page) => {
     return await ApiRequests.conferences(apiRoutes.conferences + page);
   };
 
@@ -41,7 +66,7 @@ export default class EventsScreen extends Component {
       this.setState({ loading: true });
       let pagination = this.state.page + 1;
       this.setState({ page: pagination });
-      await this.handlePopulateData(pagination).then(conferences => {
+      await this.handlePopulateData(pagination).then((conferences) => {
         conferences = conferences['data']['rows'];
         let merge = [...this.state.conferences, ...conferences];
         this.setState({ conferences: merge });
@@ -55,7 +80,7 @@ export default class EventsScreen extends Component {
 
   onRefresh = async () => {
     this.setState({ refreshing: true });
-    await this.handlePopulateData(0).then(conferences => {
+    await this.handlePopulateData(0).then((conferences) => {
       conferences = conferences['data']['rows'];
       this.setState({ conferences }, () => {
         this.setState({ refreshing: false });
@@ -102,7 +127,7 @@ export default class EventsScreen extends Component {
                         <Image
                           resizeMode="contain"
                           source={{
-                            uri: l.image,
+                            uri: l.image !== '' ? l.image : uri,
                           }}
                           style={{
                             width: 100,

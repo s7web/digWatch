@@ -12,6 +12,9 @@ import { Loader } from '../utils/loader';
 
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
+import PLACEHOLDER_IMAGE from '../../assets/images/placeholder.jpg';
+
+const uri = Image.resolveAssetSource(PLACEHOLDER_IMAGE).uri;
 
 const moment = extendMoment(Moment);
 
@@ -51,7 +54,7 @@ export default class ConferenceDayScreen extends Component {
         <View style={styles.container}>
           <Image
             resizeMode="contain"
-            source={{ uri: conference.image }}
+            source={{ uri: conference.image !== '' ? conference.image : uri }}
             style={{
               width: 120,
               height: 80,
