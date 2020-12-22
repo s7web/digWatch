@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
 import { ApiRequests } from '../api/requests';
+import HTML from 'react-native-render-html';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -20,7 +21,7 @@ export default AboutPage = ({ navigation }) => {
       navigation.push('About', { once: true });
     }
 
-    ApiRequests.aboutPageContent().then(content => {
+    ApiRequests.aboutPageContent().then((content) => {
       let data = content['data']['rows'][0];
 
       data.email = data.body.match(
@@ -39,14 +40,22 @@ export default AboutPage = ({ navigation }) => {
       {content && (
         <>
           <Text style={styles.title}>{content.title}</Text>
-          <Text style={(styles.body, { paddingBottom: 30 })}>
-            {content.body}
-            <Text
-              style={styles.body}
-              onPress={() => Linking.openURL(`mailto:${content.email}`)}
-            >
-              {content.email}
-            </Text>
+          <HTML
+            baseFontStyle={(styles.body, { paddingBottom: 30 })}
+            source={{ html: content.body }}
+          ></HTML>
+          <Text
+            style={
+              (styles.body,
+              {
+                paddingBottom: 30,
+                textDecorationLine: 'underline',
+                color: 'blue',
+              })
+            }
+            onPress={() => Linking.openURL(`mailto:${content.email}`)}
+          >
+            {content.email}
           </Text>
         </>
       )}
