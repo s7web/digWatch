@@ -32,7 +32,7 @@ export default class ConferenceSearch extends Component {
       .conferenceSearchData;
 
     this.setState({ conferenceSearch }, () => {
-      this.handlePopulateData().then(searchResults => {
+      this.handlePopulateData().then((searchResults) => {
         searchResults = searchResults['data']['rows'];
         this.setState({ searchResults });
         if (searchResults.length == 0) {
