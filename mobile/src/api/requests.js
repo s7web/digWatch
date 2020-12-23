@@ -9,7 +9,7 @@ export const apiRoutes = {
   conferencesSessionDayReport: '/jit-report.json/',
   conferencesSearch: '/jit-search.json/',
   aboutPageContent: '/jit-about.json',
-  conferenceIssues: '/jit-issues.json',
+  conferenceIssues: '/jit-issues.json/',
 };
 
 export const ApiRequests = {
