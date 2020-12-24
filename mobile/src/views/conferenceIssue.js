@@ -127,7 +127,6 @@ export default class ConferenceIssueScreen extends Component {
                 <HTML
                   baseFontStyle={{
                     fontSize: 14,
-                    fontFamily: 'robotoRegular',
                     color: '#414040',
                   }}
                   source={{ html: conferenceIssueData.body }}
