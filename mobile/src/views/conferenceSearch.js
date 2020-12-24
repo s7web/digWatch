@@ -99,6 +99,7 @@ export default class ConferenceSearch extends Component {
                         uuid: l.uuid,
                         conferenceId: conferenceSearch.conferenceId,
                         eventTitle: conferenceSearch.eventTitle,
+                        sessionid: l.conferenceId,
                       },
                     })
                   }
