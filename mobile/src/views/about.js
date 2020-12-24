@@ -10,6 +10,7 @@ import {
 import { StackActions, NavigationActions } from 'react-navigation';
 import { ApiRequests } from '../api/requests';
 import HTML from 'react-native-render-html';
+import HTMLView from 'react-native-htmlview';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -40,10 +41,12 @@ export default AboutPage = ({ navigation }) => {
       {content && (
         <>
           <Text style={styles.title}>{content.title}</Text>
-          <HTML
-            baseFontStyle={(styles.body, { paddingBottom: 30 })}
-            source={{ html: content.body }}
-          ></HTML>
+          <HTMLView
+            stylesheet={(styles.body, { paddingBottom: 30 })}
+            value={'<div>' + content.body + '</div>'}
+            addLineBreaks={false}
+            bullet=" &#x25cf; "
+          />
           <Text
             style={
               (styles.body,

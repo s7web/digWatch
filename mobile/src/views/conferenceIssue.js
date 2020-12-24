@@ -13,6 +13,7 @@ import { Divider, Icon } from 'react-native-elements';
 import { Loader } from '../utils/loader';
 import { ApiRequests, apiRoutes } from '../api/requests';
 import HTML from 'react-native-render-html';
+import HTMLView from 'react-native-htmlview';
 import PLACEHOLDER_IMAGE from '../../assets/images/placeholder.png';
 
 const uri = Image.resolveAssetSource(PLACEHOLDER_IMAGE).uri;
@@ -131,6 +132,25 @@ export default class ConferenceIssueScreen extends Component {
                     color: '#414040',
                   }}
                   source={{ html: conferenceIssueData.body }}
+                  renderers={{
+                    strong: (
+                      htmlAttribs,
+                      children,
+                      convertedCSSStyles,
+                      passProps
+                    ) => (
+                      <Text
+                        key={htmlAttribs.toString()}
+                        style={{
+                          fontWeight: 'bold',
+                          fontFamily: 'robotoRegular',
+                          color: '#000',
+                        }}
+                      >
+                        {children}
+                      </Text>
+                    ),
+                  }}
                 />
               </ScrollView>
             </>
