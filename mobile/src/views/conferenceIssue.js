@@ -13,7 +13,7 @@ import { Divider, Icon } from 'react-native-elements';
 import { Loader } from '../utils/loader';
 import { ApiRequests, apiRoutes } from '../api/requests';
 import HTML from 'react-native-render-html';
-import PLACEHOLDER_IMAGE from '../../assets/images/placeholder.jpg';
+import PLACEHOLDER_IMAGE from '../../assets/images/placeholder.png';
 
 const uri = Image.resolveAssetSource(PLACEHOLDER_IMAGE).uri;
 

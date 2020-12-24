@@ -12,7 +12,7 @@ import { Loader } from '../utils/loader';
 
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
-import PLACEHOLDER_IMAGE from '../../assets/images/placeholder.jpg';
+import PLACEHOLDER_IMAGE from '../../assets/images/placeholder.png';
 
 const uri = Image.resolveAssetSource(PLACEHOLDER_IMAGE).uri;
 
