@@ -36,12 +36,7 @@ export default class ConferenceDayScreen extends Component {
 
     this.setState({ conference });
 
-    const start = moment(conference.startdatetime);
-    const end = moment(conference.enddatetime);
-
-    const range = moment.range(start, end);
-
-    let dates = Array.from(range.by('day'));
+    let dates = moment(conference.dates);
 
     this.setState({ dates });
   }
