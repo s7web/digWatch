@@ -36,9 +36,7 @@ export default class ConferenceDayScreen extends Component {
 
     this.setState({ conference });
 
-    let dates = moment(conference.dates);
-
-    this.setState({ dates });
+    this.setState({ dates: conference.dates });
   }
 
   render() {
