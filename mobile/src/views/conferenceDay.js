@@ -146,9 +146,13 @@ export default class ConferenceDayScreen extends Component {
                   onPress={() =>
                     push('ConferenceDayIssue', {
                       conferenceIssueData: {
-                        time: `${moment(l.startdatetime).format(
-                          'HH:mm'
-                        )} - ${moment(l.enddatetime).format('HH:mm')}`,
+                        time:
+                          moment(l.startdatetime).hour() !== 0 &&
+                          moment(l.enddatetime).hour() !== 0
+                            ? `${moment(l.startdatetime).format(
+                                'HH:mm'
+                              )} - ${moment(l.enddatetime).format('HH:mm')}`
+                            : '',
                         formatedDate: conferenceData.formatedDate,
                         title: l.title,
                         image: conferenceData.image,
@@ -165,11 +169,14 @@ export default class ConferenceDayScreen extends Component {
                     disabledStyle={{ opacity: 0.2 }}
                     title={
                       <View>
-                        <Text style={styles.titleList}>{`${moment(
-                          l.startdatetime
-                        ).format('HH:mm')} - ${moment(l.enddatetime).format(
-                          'HH:mm'
-                        )}`}</Text>
+                        {moment(l.startdatetime).hour() !== 0 &&
+                          moment(l.enddatetime).hour() !== 0 && (
+                            <Text style={styles.titleList}>{`${moment(
+                              l.startdatetime
+                            ).format('HH:mm')} - ${moment(l.enddatetime).format(
+                              'HH:mm'
+                            )}`}</Text>
+                          )}
                         <Text style={styles.titleList}>
                           {l.title.split('&#039;').join("'")}
                         </Text>
