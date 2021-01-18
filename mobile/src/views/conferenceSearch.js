@@ -88,9 +88,13 @@ export default class ConferenceSearch extends Component {
                   onPress={() =>
                     push('ConferenceDayIssue', {
                       conferenceIssueData: {
-                        time: `${moment(l.startdatetime).format(
-                          'HH:mm'
-                        )} - ${moment(l.enddatetime).format('HH:mm')}`,
+                        time:
+                          moment(l.startdatetime).hour() !== 0 &&
+                          moment(l.enddatetime).hour() !== 0
+                            ? `${moment(l.startdatetime).format(
+                                'HH:mm'
+                              )} - ${moment(l.enddatetime).format('HH:mm')}`
+                            : '',
                         formatedDate: moment(l.startdatetime).format(
                           'dddd, D MMM'
                         ),
@@ -109,13 +113,22 @@ export default class ConferenceSearch extends Component {
                     disabledStyle={{ opacity: 0.2 }}
                     title={
                       <View>
-                        <Text style={styles.titleListBold}>{`${moment(
-                          l.startdatetime
-                        ).format('HH:mm')} - ${moment(l.enddatetime).format(
-                          'HH:mm'
-                        )} | ${moment(l.startdatetime).format(
-                          'dddd, D MMM'
-                        )}`}</Text>
+                        {moment(l.startdatetime).hour() !== 0 &&
+                          moment(l.enddatetime).hour() !== 0 && (
+                            <Text style={styles.titleListBold}>{`${moment(
+                              l.startdatetime
+                            ).format('HH:mm')} - ${moment(l.enddatetime).format(
+                              'HH:mm'
+                            )} | ${moment(l.startdatetime).format(
+                              'dddd, D MMM'
+                            )}`}</Text>
+                          )}
+                        {(moment(l.startdatetime).hour() === 0 ||
+                          moment(l.enddatetime).hour() === 0) && (
+                          <Text style={styles.titleListBold}>{`${moment(
+                            l.startdatetime
+                          ).format('dddd, D MMM')}`}</Text>
+                        )}
                         <Text style={styles.titleList}>{l.title}</Text>
                       </View>
                     }
