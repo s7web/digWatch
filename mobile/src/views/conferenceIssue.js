@@ -79,7 +79,9 @@ export default class ConferenceIssueScreen extends Component {
                   <Text style={styles.title}>
                     {conferenceIssueData.formatedDate}
                   </Text>
-                  <Text style={styles.title}>{conferenceIssueData.time}</Text>
+                  {conferenceIssueData.time !== '' && (
+                    <Text style={styles.title}>{conferenceIssueData.time}</Text>
+                  )}
                   <Text style={styles.subtitle}>
                     {conferenceIssueData.title.split('&#039;').join("'")}
                   </Text>
