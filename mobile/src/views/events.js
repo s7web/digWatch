@@ -31,7 +31,7 @@ export default class EventsScreen extends Component {
   }
 
   componentDidMount() {
-    this.handlePopulateData(0).then((conferences) => {
+    this.handlePopulateData(1).then((conferences) => {
       conferences = conferences['data']['rows'];
       this.setState({ conferences });
     });
@@ -80,11 +80,11 @@ export default class EventsScreen extends Component {
 
   onRefresh = async () => {
     this.setState({ refreshing: true });
-    await this.handlePopulateData(0).then((conferences) => {
+    await this.handlePopulateData(1).then((conferences) => {
       conferences = conferences['data']['rows'];
       this.setState({ conferences }, () => {
         this.setState({ refreshing: false });
-        this.setState({ page: 0 });
+        this.setState({ page: 1 });
         this.setState({ blockInfinite: false });
       });
     });

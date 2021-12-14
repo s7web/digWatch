@@ -16,7 +16,8 @@ import {
 import { createStackNavigator } from 'react-navigation-stack';
 import NetInfo from '@react-native-community/netinfo';
 
-import AppLoading from './components/AppLoading';
+// import AppLoading from './components/AppLoading';
+import AppLoading from 'expo-app-loading';
 import { cacheImages, cacheFonts } from './helpers/AssetsCaching';
 
 import { JoinedMenuWrapper } from './drawer/joinedDrawerItem';
