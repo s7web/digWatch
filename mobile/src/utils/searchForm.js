@@ -12,7 +12,7 @@ const FormView = ({ confId, routeData }) => {
   const [issues, setIssues] = useState([]);
 
   useEffect(() => {
-    ApiRequests.conferenceIssues(confId).then(issues => {
+    ApiRequests.conferenceIssues(confId).then((issues) => {
       setIssues(issues['data']['data'][1]['issues']);
     });
   }, []);
@@ -40,7 +40,7 @@ const FormView = ({ confId, routeData }) => {
         containerStyle={styles.input}
         inputStyle={{ fontFamily: 'robotoRegular', fontSize: 16 }}
         placeholder="Search"
-        onChangeText={text => {
+        onChangeText={(text) => {
           let formData = { ...form };
           formData['keyword'] = text;
           setForm(formData);
@@ -50,14 +50,14 @@ const FormView = ({ confId, routeData }) => {
       {issues && (
         <RNPickerSelect
           placeholder={placeholder}
-          onValueChange={value => {
+          onValueChange={(value) => {
             let formData = { ...form };
             formData['issueId'] = value;
             setForm(formData);
           }}
           style={{ ...pickerSelectStyles }}
           useNativeAndroidPickerStyle={false}
-          items={issues.map(issue => {
+          items={issues.map((issue) => {
             return { label: issue.issuetitle, value: issue.issueid };
           })}
         />

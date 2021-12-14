@@ -1,4 +1,4 @@
-import { createDrawerNavigator } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { Dimensions } from 'react-native';
 
 import Conference from '../views/conference';

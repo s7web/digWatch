@@ -12,6 +12,9 @@ import { Loader } from '../utils/loader';
 
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
+import PLACEHOLDER_IMAGE from '../../assets/images/placeholder.png';
+
+const uri = Image.resolveAssetSource(PLACEHOLDER_IMAGE).uri;
 
 const moment = extendMoment(Moment);
 
@@ -33,14 +36,7 @@ export default class ConferenceDayScreen extends Component {
 
     this.setState({ conference });
 
-    const start = moment(conference.startdatetime);
-    const end = moment(conference.enddatetime);
-
-    const range = moment.range(start, end);
-
-    let dates = Array.from(range.by('day'));
-
-    this.setState({ dates });
+    this.setState({ dates: conference.dates });
   }
 
   render() {
@@ -51,7 +47,7 @@ export default class ConferenceDayScreen extends Component {
         <View style={styles.container}>
           <Image
             resizeMode="contain"
-            source={{ uri: conference.image }}
+            source={{ uri: conference.image !== '' ? conference.image : uri }}
             style={{
               width: 120,
               height: 80,

@@ -10,13 +10,14 @@ import {
 import { Icon } from 'react-native-elements';
 import {
   createAppContainer,
-  createStackNavigator,
   StackActions,
   NavigationActions,
 } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import NetInfo from '@react-native-community/netinfo';
 
-import AppLoading from './components/AppLoading';
+// import AppLoading from './components/AppLoading';
+import AppLoading from 'expo-app-loading';
 import { cacheImages, cacheFonts } from './helpers/AssetsCaching';
 
 import { JoinedMenuWrapper } from './drawer/joinedDrawerItem';
@@ -366,12 +367,12 @@ export default () => {
         _handleNotification
       );
     });
-    NetInfo.fetch().then(state => {
+    NetInfo.fetch().then((state) => {
       setConnection(state.isConnected);
     });
   }, []);
 
-  _handleNotification = notification => {};
+  _handleNotification = (notification) => {};
 
   const loadAssetsAsync = async () => {
     const imageAssets = cacheImages([

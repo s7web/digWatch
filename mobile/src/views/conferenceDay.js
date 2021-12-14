@@ -35,14 +35,14 @@ export default class ConferenceDayScreen extends Component {
     let conferenceData = this.props.navigation.state.params.conferenceDayData;
 
     this.setState({ conferenceData }, () => {
-      this.handlePopulateData(0).then(conferenceDayList => {
+      this.handlePopulateData(0).then((conferenceDayList) => {
         conferenceDayList = conferenceDayList['data']['rows'];
         this.setState({ conferenceDayList });
       });
     });
   }
 
-  handlePopulateData = async page => {
+  handlePopulateData = async (page) => {
     let { date, conferenceId } = this.state.conferenceData;
     let apiReadyDate = moment(date).format('YYYYMMDD');
     return await ApiRequests.conferencesDay(
@@ -53,7 +53,7 @@ export default class ConferenceDayScreen extends Component {
   handleInfiniteScroll = async () => {
     let pagination = this.state.page + 1;
     this.setState({ page: pagination });
-    await this.handlePopulateData(pagination).then(conferenceDayList => {
+    await this.handlePopulateData(pagination).then((conferenceDayList) => {
       conferenceDayList = conferenceDayList['data']['rows'];
       let merge = [...this.state.conferenceDayList, ...conferenceDayList];
       this.setState({ conferenceDayList: merge });
@@ -62,7 +62,7 @@ export default class ConferenceDayScreen extends Component {
 
   onRefresh = async () => {
     this.setState({ refreshing: true });
-    await this.handlePopulateData(0).then(conferenceDayList => {
+    await this.handlePopulateData(0).then((conferenceDayList) => {
       conferenceDayList = conferenceDayList['data']['rows'];
       this.setState({ conferenceDayList }, () => {
         this.setState({ refreshing: false });
@@ -146,9 +146,13 @@ export default class ConferenceDayScreen extends Component {
                   onPress={() =>
                     push('ConferenceDayIssue', {
                       conferenceIssueData: {
-                        time: `${moment(l.startdatetime).format(
-                          'HH:mm'
-                        )} - ${moment(l.enddatetime).format('HH:mm')}`,
+                        time:
+                          moment(l.startdatetime).hour() !== 0 &&
+                          moment(l.enddatetime).hour() !== 0
+                            ? `${moment(l.startdatetime).format(
+                                'HH:mm'
+                              )} - ${moment(l.enddatetime).format('HH:mm')}`
+                            : '',
                         formatedDate: conferenceData.formatedDate,
                         title: l.title,
                         image: conferenceData.image,
@@ -165,11 +169,14 @@ export default class ConferenceDayScreen extends Component {
                     disabledStyle={{ opacity: 0.2 }}
                     title={
                       <View>
-                        <Text style={styles.titleList}>{`${moment(
-                          l.startdatetime
-                        ).format('HH:mm')} - ${moment(l.enddatetime).format(
-                          'HH:mm'
-                        )}`}</Text>
+                        {moment(l.startdatetime).hour() !== 0 &&
+                          moment(l.enddatetime).hour() !== 0 && (
+                            <Text style={styles.titleList}>{`${moment(
+                              l.startdatetime
+                            ).format('HH:mm')} - ${moment(l.enddatetime).format(
+                              'HH:mm'
+                            )}`}</Text>
+                          )}
                         <Text style={styles.titleList}>
                           {l.title.split('&#039;').join("'")}
                         </Text>

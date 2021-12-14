@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerItems } from 'react-navigation';
+import { DrawerItems } from 'react-navigation-drawer';
 import {
   View,
   Dimensions,
@@ -47,7 +47,9 @@ export const CustomDrawerContentComponent = (props) => {
           name="facebook-square"
           type="font-awesome"
           color="lightgrey"
-          onPress={() => Linking.openURL('https://www.facebook.com/GenevaInternetPlatform/')}
+          onPress={() =>
+            Linking.openURL('https://www.facebook.com/GenevaInternetPlatform/')
+          }
         />
         <Icon
           containerStyle={{ margin: 10, padding: 4 }}
@@ -61,25 +63,32 @@ export const CustomDrawerContentComponent = (props) => {
           name="linkedin"
           type="font-awesome"
           color="lightgrey"
-          onPress={() => Linking.openURL('https://www.linkedin.com/company/diplofoundation/')}
+          onPress={() =>
+            Linking.openURL('https://www.linkedin.com/company/diplofoundation/')
+          }
         />
         <Icon
           containerStyle={{ margin: 10, padding: 4 }}
           name="instagram"
           type="font-awesome"
           color="lightgrey"
-          onPress={() => Linking.openURL('https://www.instagram.com/diplofoundation/')}
+          onPress={() =>
+            Linking.openURL('https://www.instagram.com/diplofoundation/')
+          }
         />
       </View>
       <View
         style={{
-          position: 'absolute', bottom: 0, left: 12, marginBottom: 12
+          position: 'absolute',
+          bottom: 0,
+          left: 12,
+          marginBottom: 12,
         }}
       >
         <ListItem
           style={{ width: WINDOW_WIDTH - 24 }}
           key={0}
-          title={(
+          title={
             <View style={{ flexDirection: 'row', marginTop: 12 }}>
               <Text style={{ fontFamily: 'robotoRegular' }}>
                 Application powered by
@@ -95,7 +104,7 @@ export const CustomDrawerContentComponent = (props) => {
                 }}
               />
             </View>
-          )}
+          }
           titleStyle={{
             fontFamily: 'robotoRegular',
             color: '#757575',
@@ -109,14 +118,15 @@ export const CustomDrawerContentComponent = (props) => {
 };
 
 export const navigationOptions = (title, lastItem = false) => ({
-  drawerLabel: () => (
-    <ListItem
-      style={{ width: WINDOW_WIDTH - 24 }}
-      key={0}
-      title={title}
-      titleStyle={{ fontFamily: 'robotoRegular', color: '#757575' }}
-      topDivider
-      bottomDivider={lastItem}
-    />
-  ),
+  drawerLabel: () =>
+    title && (
+      <ListItem
+        style={{ width: WINDOW_WIDTH - 24 }}
+        key={0}
+        title={title}
+        titleStyle={{ fontFamily: 'robotoRegular', color: '#757575' }}
+        topDivider
+        bottomDivider={lastItem}
+      />
+    ),
 });
