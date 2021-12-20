@@ -3,13 +3,13 @@ import axios from 'axios';
 export const baseUrl = 'https://dig.watch';
 
 export const apiRoutes = {
-  //conferences: '/jit-conferences.json?page=',
-  //conferencesDay: '/jit-conferences-by-day.json/',
-  // conferencesDayReport: '/jsonapi/node/conference_sessions/',
-  // conferencesSessionDayReport: '/jit-report.json/',
-  // conferencesSearch: '/jit-search.json/',
-  // aboutPageContent: '/jit-about.json',
-  // conferenceIssues: '/jit-issues.json/',
+  //  conferences: '/jit-conferences.json?page=',
+  //  conferencesDay: '/jit-conferences-by-day.json/',
+  //  conferencesDayReport: '/jsonapi/node/conference_sessions/',
+  //  conferencesSessionDayReport: '/jit-report.json/',
+  //  conferencesSearch: '/jit-search.json/',
+  //  aboutPageContent: '/jit-about.json',
+  //  conferenceIssues: '/jit-issues.json/',
   
   conferences: '/wp-json/dw/v1/events/page=',
   conferencesDay: '/wp-json/dw/v1/event-reports/id=',

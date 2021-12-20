@@ -21,7 +21,7 @@ export default class EventsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 0,
+      page: 1,
       loading: false,
       conferences: false,
       refreshing: false,
@@ -144,7 +144,7 @@ export default class EventsScreen extends Component {
                     title={
                       <View style={{ marginLeft: 20 }}>
                         <Text>Session reports from the</Text>
-                        <Text>{l.title}</Text>
+                        <Text>{l.post_title}</Text>
                         <Text>{l.location}</Text>
                       </View>
                     }

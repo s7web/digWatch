@@ -2,7 +2,7 @@
   "expo": {
     "name": "DW Just-in-Time Reporting",
     "slug": "dig-watch",
-    "version": "1.0.2",
+    "version": "1.0.6",
     "description": "DW Just-in-Time Reporting",
     "privacy": "public",
     "platforms": [
@@ -35,7 +35,7 @@
     },
     "android": {
       "package": "com.Dig.Watch",
-      "versionCode": 2,
+      "versionCode": 6,
       "icon": "./digwatch-icon.png",
       "permissions": [
         "NOTIFICATIONS"

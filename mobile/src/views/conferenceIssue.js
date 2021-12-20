@@ -112,7 +112,7 @@ export default class ConferenceIssueScreen extends Component {
                         .split('&#039;')
                         .join("'")} -  ${conferenceIssueData.formatedDate} ${
                         conferenceIssueData.time
-                      } | https://dig.watch${conferenceIssueData.path.alias}`,
+                      } | https://dig.watch${conferenceIssueData.path}`,
                     })
                   }
                 />

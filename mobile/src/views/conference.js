@@ -57,7 +57,7 @@ export default class ConferenceDayScreen extends Component {
           />
 
           <Text style={styles.title}>
-            Session reports from the {conference.title}{' '}
+            Session reports from the {conference.post_title}{' '}
           </Text>
           <Text style={styles.titleLast}>{conference.location}</Text>
 
@@ -75,7 +75,7 @@ export default class ConferenceDayScreen extends Component {
                         formatedDate: moment(l).format('dddd, D MMM'),
                         image: conference.image,
                         shareUrl: conference.path,
-                        shareTitle: conference.title,
+                        shareTitle: conference.post_title,
                       },
                     })
                   }
