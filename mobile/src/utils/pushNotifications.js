@@ -1,11 +1,11 @@
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
-import { ApiRequests } from '../api/requests';
 import { Platform } from 'react-native';
+import { ApiRequests } from '../api/requests';
 
 export default async function registerForPushNotificationsAsync() {
   const { status: existingStatus } = await Permissions.getAsync(
-    Permissions.NOTIFICATIONS
+    Permissions.NOTIFICATIONS,
   );
   let finalStatus = existingStatus;
 
@@ -35,9 +35,9 @@ export default async function registerForPushNotificationsAsync() {
   }
 
   // Get the token that uniquely identifies this device
-  let token = await Notifications.getExpoPushTokenAsync();
+  const token = await Notifications.getExpoPushTokenAsync();
 
-  ApiRequests.saveToken(token).then(res => {
-    //if we want anything to say about this we do it here
+  ApiRequests.saveToken(token).then(() => {
+    // if we want anything to say about this we do it here
   });
 }
