@@ -30,7 +30,7 @@
     "expo-permissions": "^13.0.3",
     "expokit": "^36.0.1",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "moment-range": "^4.0.2",
     "prop-types": "^15.7.2",
     "react": "17.0.1",
